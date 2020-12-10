@@ -46,7 +46,7 @@ export class StartPage implements OnInit {
   async signinClient() {
     const response = await this.connection.signinClient(this.signClient);
     console.log(response);
-    if (response['ok']) {
+    if (response['auth']) {
       //limpiar los campos
       this.tab = 'login';
       this.presentToast('El cliente ha sido creado exitosamente. Puede iniciar sesion.');
@@ -71,7 +71,7 @@ export class StartPage implements OnInit {
 
   async login() {
     const response = await this.connection.login(this.log);
-    if (response['ok']) {
+    if (response['auth']) {
       this.log.email = '';
       this.log.password = '';
       //localstorage
