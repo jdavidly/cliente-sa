@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { ConnectionService } from '../services/connection.service';
 
 @Component({
   selector: 'app-start',
@@ -7,9 +10,105 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartPage implements OnInit {
 
-  constructor() { }
+  esProveedor: boolean = false;
+  tab: string = 'login';
+  log: Login = {
+    email: 'jorge@gmail.com',
+    password: '123'
+  };
+
+  signClient: SigninClient = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    password_repeated: '',
+    phone_number: ''
+  };
+
+  signProvider: SigninProvider = {
+    name: '',
+    email: '',
+    password: '',
+    password_repeated: '',
+    address: ''
+  };
+
+  constructor(
+    private connection: ConnectionService,
+    private toastController: ToastController,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+  async signinClient() {
+    const response = await this.connection.signinClient(this.signClient);
+    console.log(response);
+    if (response['auth']) {
+      //limpiar los campos
+      this.tab = 'login';
+      this.presentToast('El cliente ha sido creado exitosamente. Puede iniciar sesion.');
+    } else {
+      //mensajes de error vendran en la respuesta
+      this.presentToast('Los datos de registro son incorrectos');
+    }
+  }
+
+  async signinProvider() {
+    const response = await this.connection.signinProvider(this.signProvider);
+    console.log(response);
+    if (response['ok']) {
+      //limpiar los campos
+      this.tab = 'login';
+      this.presentToast('El proveedor ha sido creado exitosamente. Puede iniciar sesion.');
+    } else {
+      //mensajes de error vendran en la respuesta
+      this.presentToast('Los datos de registro son incorrectos');
+    }
+  }
+
+  async login() {
+    const response = await this.connection.login(this.log);
+    if (response['auth']) {
+      this.log.email = '';
+      this.log.password = '';
+      //localstorage
+      this.router.navigate(['/home']);
+    } else {
+      this.presentToast('El correo o contrasena son incorrectos');
+    }
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+}
+
+export interface SigninClient {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  password_repeated: string;
+  phone_number: string;
+}
+
+export interface SigninProvider {
+  name: string;
+  email: string;
+  password: string;
+  password_repeated: string;
+  address: string;
+}
+
+export interface Login {
+  email: string;
+  password: string;
 }
