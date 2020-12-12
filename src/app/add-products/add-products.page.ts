@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Key } from 'protractor';
 import { ConnectionService } from '../services/connection.service';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+
 
 export interface ObjCategoria {
   categoria: number;
@@ -32,10 +34,13 @@ export class AddProductsPage implements OnInit {
     cantidad: 0,
     categoria: 0,
     imagen: '',
-    user:1
+    user:1  // TODO: CAMBIAR POR LA VARIABLE DE USUARIO
   };
 
-  constructor(private connection: ConnectionService) { 
+  constructor(private connection: ConnectionService,
+      private toastController: ToastController,
+      private router: Router
+    ) { 
     this.getCategorias();
   }
 
@@ -50,17 +55,31 @@ export class AddProductsPage implements OnInit {
   }
   
   async addProducto() {
-    console.log(this.newProduct);
+    //console.log(this.newProduct);
     const response = await this.connection.addProduct(this.newProduct);
-    console.log(response);
-    if (response['ok']) {
-      //limpiar los campos
-      //this.tab = 'login';
-      //this.presentToast('El proveedor ha sido creado exitosamente. Puede iniciar sesion.');
+    //console.log("respuesta de la api: ",response);
+    if (response['auth']) {
+      this.presentToast('El producto fue agregado.');
+      this.newProduct = {
+        nombre: '',
+        precio: 0,
+        cantidad: 0,
+        categoria: 0,
+        imagen: '',
+        user:1  // TODO: CAMBIAR POR LA VARIABLE DE USUARIO
+      };
     } else {
       //mensajes de error vendran en la respuesta
-      //this.presentToast('Los datos de registro son incorrectos');
+      this.presentToast('Error al agregar el producto, revise los datos ingresado');
     }
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
