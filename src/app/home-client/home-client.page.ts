@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ProductDetailPage } from '../product-detail/product-detail.page';
 import { ConnectionService } from '../services/connection.service';
 
 @Component({
@@ -13,7 +15,8 @@ export class HomeClientPage implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
 
   constructor(
-    private connection: ConnectionService
+    private connection: ConnectionService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -36,6 +39,18 @@ export class HomeClientPage implements OnInit {
         this.productos = products;
       });
     }
+  }
+
+  async ver(id: number) {
+    const modal = await this.modalController.create({
+      component: ProductDetailPage,
+      componentProps: {
+        'producto': this.productos.find((producto) => {
+          return producto.producto === id;
+        })
+      }
+    });
+    return await modal.present();
   }
 
 }
