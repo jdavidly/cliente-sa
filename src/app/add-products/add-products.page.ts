@@ -55,7 +55,7 @@ export class AddProductsPage implements OnInit {
   }
   
   async addProducto() {
-    //console.log(this.newProduct);
+    console.log(this.newProduct);
     const response = await this.connection.addProduct(this.newProduct);
     //console.log("respuesta de la api: ",response);
     if (response['auth']) {

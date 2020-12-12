@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, SigninClient, SigninProvider } from '../start/start.page';
 import { NuevoProducto } from '../add-products/add-products.page';
+import { Usuario } from '../products-provider/products-provider.page'
 @Injectable({
   providedIn: 'root'
 })
@@ -31,6 +32,10 @@ export class ConnectionService {
 
   async addProduct(s: NuevoProducto) {
     return this.http.post(`${this.url}product/addProduct`, s).toPromise();
+  }
+
+  async getProductsProvider(s: Usuario) {
+    return this.http.post(`${this.url}product/proveedor`, s).toPromise();
   }
 
 }
