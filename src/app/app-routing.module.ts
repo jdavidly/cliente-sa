@@ -13,7 +13,11 @@ const routes: Routes = [
   {
     path: 'add-products',
     loadChildren: () => import('./add-products/add-products.module').then( m => m.AddProductsPageModule)
+  },  {
+    path: 'products-provider',
+    loadChildren: () => import('./products-provider/products-provider.module').then( m => m.ProductsProviderPageModule)
   },
+
 ];
 
 /*{
