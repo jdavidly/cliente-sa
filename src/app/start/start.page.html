@@ -1,0 +1,196 @@
+<ion-content>
+
+  <ion-segment [(ngModel)]="tab">
+    <ion-segment-button value="login" class="ancho-segmento">
+      <ion-icon name="key-outline"></ion-icon>
+      <ion-label>Inicio de sesion</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="signin" class="ancho-segmento">
+      <ion-icon name="person-add-outline"></ion-icon>
+      <ion-label>Registro</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="tab">
+    <div *ngSwitchCase="'login'">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" size-xl="8">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Iniciar sesion</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label position="floating">Correo</ion-label>
+                    <ion-input type="text" placeholder="jorge@gmail.com" [(ngModel)]="log.email" clearInput required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label type="text" position="floating">Contrasena</ion-label>
+                    <ion-input type="password" [(ngModel)]="log.password" clearInput required minlength="8"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-button expand="full" (click)="login()">Ingresar</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </div>
+    <div *ngSwitchCase="'signin'">
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" size-xl="8">
+          <ion-item>
+            <ion-label>Estoy registrando a un proveedor</ion-label>
+            <ion-toggle [(ngModel)]="show" (ionChange)="esProveedor = !esProveedor"></ion-toggle>
+          </ion-item>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row *ngIf="!esProveedor">
+        <ion-col></ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" size-xl="8">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Datos de cliente</ion-card-title>
+              <ion-card-subtitle>Con estos datos iniciaras sesion</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label position="floating">Nombres</ion-label>
+                    <ion-input type="text" placeholder="Jorge David" [(ngModel)]="signClient.first_name" clearInput
+                      required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label position="floating">Apellidos</ion-label>
+                    <ion-input type="text" placeholder="Lopez Yool" [(ngModel)]="signClient.last_name" clearInput
+                      required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label position="floating">Correo electronico</ion-label>
+                    <ion-input type="text" placeholder="jorge@gmail.com" [(ngModel)]="signClient.email" clearInput
+                      required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label type="text" position="floating">Contrasena</ion-label>
+                    <ion-input type="password" [(ngModel)]="signClient.password" clearInput required minlength="8">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label type="text" position="floating">Repetir contrasena</ion-label>
+                    <ion-input type="password" [(ngModel)]="signClient.password_repeated" clearInput required
+                      minlength="8">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button expand="block" (click)="signinClient()">
+                    Crear cuenta de cliente
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row *ngIf="esProveedor">
+        <ion-col></ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" size-xl="8">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Datos de proveedor</ion-card-title>
+              <ion-card-subtitle>Con estos datos iniciaras sesion</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label position="floating">Nombre de la empresa</ion-label>
+                    <ion-input type="text" placeholder="La Bendicion" [(ngModel)]="signProvider.name" clearInput
+                      required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label position="floating">Correo electronico de la empresa</ion-label>
+                    <ion-input type="text" placeholder="labendicion@lbsa.com" [(ngModel)]="signProvider.email"
+                      clearInput required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label type="text" position="floating">Contrasena</ion-label>
+                    <ion-input type="password" [(ngModel)]="signProvider.password" clearInput required minlength="8">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                  <ion-item>
+                    <ion-label type="text" position="floating">Repetir contrasena</ion-label>
+                    <ion-input type="password" [(ngModel)]="signProvider.password_repeated" clearInput required
+                      minlength="8">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button expand="block" (click)="signinProvider()">
+                    Crear cuenta de proveedor
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+</ion-content>
