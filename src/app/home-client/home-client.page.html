@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Hola, {{user.first_name}}!
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          Carrito
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-item>
+          <ion-label>Filtrar por categorias</ion-label>
+          <ion-select interface="popover" (ionChange)="categoryChange($event)">
+            <ion-select-option value="0">Todos</ion-select-option>
+            <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.categoria">{{categoria.nombre}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let producto of productos" size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
+      <ion-card (click)="ver(producto.id_producto)" class="ion-activatable ripple-parent" button=true
+        class="tarjetaHome">
+        <ion-img [src]="producto.imagen" class="imagenHome"></ion-img>
+        <ion-card-header>
+          <ion-card-title>{{producto.nombre}}</ion-card-title>
+          <ion-card-subtitle>Q. {{producto.precio}}</ion-card-subtitle>
+        </ion-card-header>
+        <!-- <ion-ripple-effect></ion-ripple-effect> -->
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
