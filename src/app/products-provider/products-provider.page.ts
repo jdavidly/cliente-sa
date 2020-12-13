@@ -25,14 +25,14 @@ export class ProductsProviderPage implements OnInit {
   //productos: Producto[] = [];
   productos2:any;
   user:Usuario = {
-    user:11  //TODO: CAMBIAR EL VALOR DEL USER POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
+    user:1 //TODO: CAMBIAR EL VALOR DEL USER POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
   }
   
   constructor(private connection: ConnectionService,
     private toastController: ToastController,
     private router: Router) { 
       this.user = {
-        user:11  //TODO: CAMBIAR EL VALOR DEL USER POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
+        user:1  //TODO: CAMBIAR EL VALOR DEL USER POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
       }
       this.getProductos();
     }
@@ -46,6 +46,7 @@ export class ProductsProviderPage implements OnInit {
   
   async viewDetails(row){
     console.log(row)
+    this.router.navigate(['/view-product-provider']);
   }
   
 }

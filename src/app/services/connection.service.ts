@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, SigninClient, SigninProvider } from '../start/start.page';
 import { NuevoProducto } from '../add-products/add-products.page';
-import { Usuario } from '../products-provider/products-provider.page'
+import { Usuario } from '../products-provider/products-provider.page';
+import { ProductDelete } from '../view-product-provider/view-product-provider.page';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +38,10 @@ export class ConnectionService {
 
   async getProductsProvider(s: Usuario) {
     return this.http.post(`${this.url}product/proveedor`, s).toPromise();
+  }
+
+  async deletProduct(s: ProductDelete) {
+    return this.http.post(`${this.url}product/delete`, s).toPromise();
   }
 
 }
