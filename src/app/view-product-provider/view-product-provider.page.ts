@@ -7,6 +7,10 @@ import { User } from '../home-client/home-client.page';
 export interface ProductDelete{
   producto:number;
 }
+export interface ProductUpdate{
+  producto:number;
+  precio:number;
+}
 export interface Producto {
   producto: number;
   nombre: string;
@@ -26,6 +30,7 @@ export class ViewProductProviderPage implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
   eliminar:ProductDelete = { producto:-1 }
+  modificar:ProductUpdate = { producto:-1, precio:-1 }
   
   producto:Producto = JSON.parse(localStorage.getItem('prodActProveedor'));
   /*producto:Producto = {
@@ -61,12 +66,15 @@ export class ViewProductProviderPage implements OnInit {
 
 
   async updateProduct() {
-    const response = await this.connection.deletProduct(this.eliminar);
+    this.modificar.producto = this.producto.producto;
+    this.modificar.precio = this.producto.precio;
+    console.log(this.modificar)
+    const response = await this.connection.updateProduct(this.modificar);
     if (response['auth']) {
-      console.log("Producto Eliminado");
+      console.log("Precio Modificado");
       this.router.navigate(['/products-provider']);
     } else {
-      console.log("Error al eliminar producto");
+      console.log("Error al modificar producto");
     }
   }
 
