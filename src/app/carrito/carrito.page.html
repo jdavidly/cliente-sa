@@ -1,24 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Encuentra tu producto</ion-title>
+    <ion-title>Confirmación de compra</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
- 
-    <ion-item>
-      <ion-label>Categoría</ion-label>
-      <ion-select value="cat" okText="Confirmar" multiple="true" cancelText="Cancelar">
-        <ion-select-option value="brown">Brown</ion-select-option>
-        <ion-select-option value="blonde">Blonde</ion-select-option>
-        <ion-select-option value="black">Black</ion-select-option>
-        <ion-select-option value="red">Red</ion-select-option>
-      </ion-select>
-    </ion-item>
-  
-  </ion-list>
-  
-
-
+  <ion-header [translucent]="true">         
+  </ion-header>   
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-item>
+          
+          <ion-button slot="end" color="primary" (click)="doPayment()">Realizar Pago Total Q.{{total}}</ion-button> 
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngFor="let item of carrito" size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
+    <ion-card>
+      <ion-img [src]="item.url"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+        <ion-card-subtitle>Cantidad: {{item.cantidad}} Unitario: Q.{{item.precio}}  Total Q. {{item.precio*item.cantidad}} </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ion-row>
 </ion-content>

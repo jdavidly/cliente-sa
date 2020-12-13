@@ -45,7 +45,6 @@ export class StartPage implements OnInit {
 
   async signinClient() {
     const response = await this.connection.signinClient(this.signClient);
-    console.log(response);
     if (response['auth']) {
       //limpiar los campos
       this.tab = 'login';
@@ -58,7 +57,6 @@ export class StartPage implements OnInit {
 
   async signinProvider() {
     const response = await this.connection.signinProvider(this.signProvider);
-    console.log(response);
     if (response['ok']) {
       //limpiar los campos
       this.tab = 'login';
@@ -74,8 +72,8 @@ export class StartPage implements OnInit {
     if (response['auth']) {
       this.log.email = '';
       this.log.password = '';
-      //localstorage
-      this.router.navigate(['/home']);
+      localStorage.setItem('user', JSON.stringify(response['result']));
+      this.router.navigate(['/home-client']);
     } else {
       this.presentToast('El correo o contrasena son incorrectos');
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { ConnectionService } from '../services/connection.service';
 
 @Component({
   selector: 'app-carrito',
@@ -9,10 +10,31 @@ import { MenuController } from '@ionic/angular';
 
 export class CarritoPage implements OnInit {
 
-  ngOnInit() {
+  carrito: ProductoCarrito[] = [];  
+  user: User = JSON.parse(localStorage.getItem('user'));
+  total: number = 0;
+
+  
+
+  ngOnInit() 
+  {
+    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>{      
+    this.carrito = carritos; 
+    var tmp = 0;
+    for(var i =0; i< this.carrito.length; i++)
+    {
+      tmp = tmp + (carritos[i].cantidad*carritos[i].precio);
+    }  
+    this.total = tmp;      
+    });
   }
 
-  constructor(private menu: MenuController) { }
+  constructor
+  (
+    private menu: MenuController,
+    private connection: ConnectionService
+  ) 
+  { }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -28,4 +50,25 @@ export class CarritoPage implements OnInit {
     this.menu.open('custom');
   }  
 
+}
+
+
+export interface ProductoCarrito
+{
+  nombre: String;
+  precio: number;
+  cantidad: number;  
+  codigo: number;  
+}
+
+export interface User {
+  user: number;
+  first_name: string;
+  last_name: string;
+  name: string;
+  email: string;
+  password: string;
+  phone_number: string;
+  address: string;
+  role: boolean;
 }
