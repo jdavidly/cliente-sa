@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
   },
   {
+    path: 'view-product-provider',
+    loadChildren: () => import('./view-product-provider/view-product-provider.module').then( m => m.ViewProductProviderPageModule)
+  },
+  {
     path: 'product-detail',
     loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
