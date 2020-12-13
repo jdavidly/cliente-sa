@@ -13,6 +13,7 @@ export class HomeClientPage implements OnInit {
   productos: Producto[] = [];
   categorias: Categoria[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
+  contador: number = 0;
 
   constructor(
     private connection: ConnectionService,
@@ -41,13 +42,16 @@ export class HomeClientPage implements OnInit {
     }
   }
 
-  async ver(id: number) {
+  async ver(producto: Producto) {
     const modal = await this.modalController.create({
       component: ProductDetailPage,
       componentProps: {
-        'producto': this.productos.find((producto) => {
-          return producto.producto === id;
-        })
+        producto
+      }
+    });
+    modal.onDidDismiss().then((dato) => {
+      if (dato && dato['data'] && dato['data']['compro']) {
+        this.contador = this.contador + 1;
       }
     });
     return await modal.present();
@@ -72,7 +76,7 @@ export interface Categoria {
 }
 
 export interface User {
-  id: number;
+  user: number;
   first_name: string;
   last_name: string;
   name: string;

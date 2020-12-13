@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { Producto, User } from '../home-client/home-client.page';
+import { ConnectionService } from '../services/connection.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailPage implements OnInit {
 
-  constructor() { }
+  producto: Producto;
+  cantidad: number = 1;
+  compro: boolean = false;
+  user: User = JSON.parse(localStorage.getItem('user'));
+
+  constructor(
+    private modalController: ModalController,
+    private connection: ConnectionService
+  ) { }
 
   ngOnInit() {
+    console.log(this.producto);
+  }
+
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true,
+      compro: this.compro
+    });
+  }
+
+  async agregar() {
+    this.compro = true;
+    const result = await this.connection.addToCart(this.user.user, this.producto.producto, this.cantidad);
+    console.log(result);
   }
 
 }

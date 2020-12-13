@@ -45,4 +45,8 @@ export class ConnectionService {
     return this.http.get(`${this.url}product/products/${category}`);
   }
 
+  async addToCart(user: number, producto: number, cantidad: number) {
+    return this.http.post(`${this.url}cart/add`, { user, producto, cantidad }).toPromise();
+  }
+
 }

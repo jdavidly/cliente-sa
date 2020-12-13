@@ -45,7 +45,6 @@ export class StartPage implements OnInit {
 
   async signinClient() {
     const response = await this.connection.signinClient(this.signClient);
-    console.log(response);
     if (response['auth']) {
       //limpiar los campos
       this.tab = 'login';
