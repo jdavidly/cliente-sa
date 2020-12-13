@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { User } from '../home-client/home-client.page';
 
 export interface Usuario {
   user: number;
@@ -14,6 +15,7 @@ export interface Producto {
   cantidad: number;
   categoria: number;
   url: string;
+  descripcion: string;
 }
 
 @Component({
@@ -24,15 +26,17 @@ export interface Producto {
 export class ProductsProviderPage implements OnInit {
   //productos: Producto[] = [];
   productos2:any;
-  user:Usuario = {
-    user:1 //TODO: CAMBIAR EL VALOR DEL USER POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
+  user: User = JSON.parse(localStorage.getItem('user'));
+  idUser: Usuario = {
+    user: 0
   }
   
   constructor(private connection: ConnectionService,
     private toastController: ToastController,
     private router: Router) { 
-      this.user = {
-        user:1  //TODO: CAMBIAR EL VALOR DEL USER POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
+      console.log(this.user);
+      this.idUser = {
+        user: this.user.user
       }
       this.getProductos();
     }
@@ -45,6 +49,7 @@ export class ProductsProviderPage implements OnInit {
   }
   
   async viewDetails(row){
+    localStorage.setItem('prodActProveedor', JSON.stringify(row));
     console.log(row)
     this.router.navigate(['/view-product-provider']);
   }

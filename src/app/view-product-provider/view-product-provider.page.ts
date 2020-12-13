@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { User } from '../home-client/home-client.page';
 
 export interface ProductDelete{
   producto:number;
@@ -13,6 +14,7 @@ export interface Producto {
   cantidad: number;
   categoria: number;
   url: string;
+  descripcion: string;
 }
 
 @Component({
@@ -22,29 +24,31 @@ export interface Producto {
 })
 export class ViewProductProviderPage implements OnInit {
 
-  eliminar:ProductDelete = {
-    producto:11  //TODO: CAMBIAR EL VALOR DEL PRODUCTO POR LA VARIABLE DE SESIO DE PROVEEDOR ACTUAL
-  }
+  user: User = JSON.parse(localStorage.getItem('user'));
+  eliminar:ProductDelete = { producto:-1 }
   
-  producto:Producto = {
+  producto:Producto = JSON.parse(localStorage.getItem('prodActProveedor'));
+  /*producto:Producto = {
     producto: 1,
     nombre: "Auriculares",
     precio: 175.5,
     cantidad: 100,
     categoria: 2,
     url: "https://www.redeszone.net/app/uploads-redeszone.net/2017/09/Cascos-Bluetooth-930x452.png"
-  }
+  }*/
 
   constructor(private connection: ConnectionService,
     private toastController: ToastController,
     private router: Router) { 
-
+      this.eliminar = {
+        producto: this.producto.producto
+      }
     }
 
   ngOnInit() {
   }
 
-  async deletProduct() {
+  async deleteProduct() {
     const response = await this.connection.deletProduct(this.eliminar);
     if (response['auth']) {
       console.log("Producto Eliminado");
@@ -54,10 +58,11 @@ export class ViewProductProviderPage implements OnInit {
       console.log("Error al eliminar producto");
     }
   }
+
+
   async updateProduct() {
     const response = await this.connection.deletProduct(this.eliminar);
     if (response['auth']) {
-      console.log(this.producto)
       console.log("Producto Eliminado");
       this.router.navigate(['/products-provider']);
     } else {

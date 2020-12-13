@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de {{producto.nombre}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <img [src]="producto.url" />
+    <ion-card-header>
+      <ion-card-title>Q. {{producto.precio}}</ion-card-title>
+      <ion-card-subtitle>Existencias: {{producto.cantidad - cantidad}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p>{{producto.descripcion}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size-xs="2">
+            <ion-input type="number" [(ngModel)]="cantidad" [(max)]="producto.cantidad" min="1"></ion-input>
+          </ion-col>
+          <ion-col size-xs="5">
+            <ion-button (click)="agregar()" color="success" expand="block">
+              Agregar
+            </ion-button>
+          </ion-col>
+          <ion-col size-xs="5">
+            <ion-button (click)="dismiss()" color="danger" expand="block">
+              Salir
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
