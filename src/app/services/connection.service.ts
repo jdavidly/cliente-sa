@@ -33,4 +33,20 @@ export class ConnectionService {
     return this.http.post(`${this.url}product/addProduct`, s).toPromise();
   }
 
+  getCategories() {
+    return this.http.get(`${this.url}product/categorias`);
+  }
+
+  getProducts() {
+    return this.http.get(`${this.url}product/products`);
+  }
+
+  getProductsByCategory(category: number) {
+    return this.http.get(`${this.url}product/products/${category}`);
+  }
+
+  async addToCart(user: number, producto: number, cantidad: number) {
+    return this.http.post(`${this.url}cart/add`, { user, producto, cantidad }).toPromise();
+  }
+
 }
