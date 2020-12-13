@@ -10,8 +10,8 @@ import { ProductDelete } from '../view-product-provider/view-product-provider.pa
 })
 export class ConnectionService {
 
-  url: string = 'http://localhost:3000/';
-  //url: string = 'https://sa-proyecto.herokuapp.com/';
+  //url: string = 'http://localhost:3000/';
+  url: string = 'https://sa-proyecto.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
