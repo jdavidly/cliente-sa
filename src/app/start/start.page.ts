@@ -73,7 +73,11 @@ export class StartPage implements OnInit {
       this.log.email = '';
       this.log.password = '';
       localStorage.setItem('user', JSON.stringify(response['result']));
-      this.router.navigate(['/home-client']);
+      if(response['result'].role){
+        this.router.navigate(['/home-client']);
+      }else{
+        this.router.navigate(['/home-provider']);
+      }
     } else {
       this.presentToast('El correo o contrasena son incorrectos');
     }

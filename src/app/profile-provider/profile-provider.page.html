@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile-provider</ion-title>
+    <ion-title>Perfil De Proveedor</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bloque">
+  <br>
+  <ion-item>
+    <ion-label>Nombres</ion-label>
+    <ion-label>{{user.first_name}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Apellidos:</ion-label>
+    <ion-label>{{user.last_name}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Correo Electronico:</ion-label>
+    <ion-label>{{user.email}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Numero Telefonico:</ion-label>
+    <ion-label>{{user.phone_number}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Direccion:</ion-label>
+    <ion-label>{{user.address}}</ion-label>
+  </ion-item>
+
 
 </ion-content>
