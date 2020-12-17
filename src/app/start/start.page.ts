@@ -57,7 +57,7 @@ export class StartPage implements OnInit {
 
   async signinProvider() {
     const response = await this.connection.signinProvider(this.signProvider);
-    if (response['ok']) {
+    if (response['auth']) {
       //limpiar los campos
       this.tab = 'login';
       this.presentToast('El proveedor ha sido creado exitosamente. Puede iniciar sesion.');
@@ -70,10 +70,15 @@ export class StartPage implements OnInit {
   async login() {
     const response = await this.connection.login(this.log);
     if (response['auth']) {
+      console.log(response);
       this.log.email = '';
       this.log.password = '';
       localStorage.setItem('user', JSON.stringify(response['result']));
-      this.router.navigate(['/home-client']);
+      if (response['result']['role'] === 1) {
+        this.router.navigate(['/home-client']);
+      } else {
+        this.router.navigate(['/products-provider']);
+      }
     } else {
       this.presentToast('El correo o contrasena son incorrectos');
     }
