@@ -2,16 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, SigninClient, SigninProvider } from '../start/start.page';
 import { NuevoProducto } from '../add-products/add-products.page';
-import { Usuario } from '../products-provider/products-provider.page';
-import { ProductDelete } from '../view-product-provider/view-product-provider.page';
-
+import { Usuario } from '../products-provider/products-provider.page'
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionService {
 
-  //url: string = 'http://localhost:3000/';
-  url: string = 'https://sa-proyecto.herokuapp.com/';
+  url: string = 'http://localhost:3000/';
+  //url: string = 'https://sa-proyecto.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
@@ -71,5 +69,7 @@ export class ConnectionService {
   async deletProduct(s: ProductDelete) {
     return this.http.post(`${this.url}product/delete`, s).toPromise();
   }
+
+  
 
 }
