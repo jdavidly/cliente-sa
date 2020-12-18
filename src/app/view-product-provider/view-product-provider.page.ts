@@ -10,6 +10,7 @@ export interface ProductDelete{
 export interface ProductUpdate{
   producto:number;
   precio:number;
+  cantidad:number;
 }
 export interface Producto {
   producto: number;
@@ -30,7 +31,7 @@ export class ViewProductProviderPage implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
   eliminar:ProductDelete = { producto:-1 }
-  modificar:ProductUpdate = { producto:-1, precio:-1 }
+  modificar:ProductUpdate = { producto:-1, precio:-1, cantidad:-1 }
   
   producto:Producto = JSON.parse(localStorage.getItem('prodActProveedor'));
   /*producto:Producto = {
@@ -68,7 +69,8 @@ export class ViewProductProviderPage implements OnInit {
   async updateProduct() {
     this.modificar.producto = this.producto.producto;
     this.modificar.precio = this.producto.precio;
-    console.log(this.modificar)
+    this.modificar.cantidad = this.producto.cantidad;
+    //console.log(this.modificar)
     const response = await this.connection.updateProduct(this.modificar);
     if (response['auth']) {
       console.log("Precio Modificado");

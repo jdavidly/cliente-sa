@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-
+import { User } from '../home-client/home-client.page';
 
 export interface ObjCategoria {
   categoria: number;
@@ -28,13 +28,14 @@ export interface NuevoProducto {
 export class AddProductsPage implements OnInit {
 
   categorias: ObjCategoria [] = [];
+  user: User = JSON.parse(localStorage.getItem('user'));
   newProduct: NuevoProducto = {
     nombre: '',
     precio: 0,
     cantidad: 0,
     categoria: 0,
     imagen: '',
-    user:1  // TODO: CAMBIAR POR LA VARIABLE DE USUARIO
+    user: this.user.user  
   };
 
   constructor(private connection: ConnectionService,
@@ -48,7 +49,6 @@ export class AddProductsPage implements OnInit {
 
   async getCategorias() {
     const response = await this.connection.getCategorias();
-    //console.log(response);
     Object.keys(response).forEach (key =>{
       this.categorias.push({categoria: response[key] ['categoria'], nombre: response[key]['nombre']});
     });
@@ -57,7 +57,6 @@ export class AddProductsPage implements OnInit {
   async addProducto() {
     console.log(this.newProduct);
     const response = await this.connection.addProduct(this.newProduct);
-    //console.log("respuesta de la api: ",response);
     if (response['auth']) {
       this.presentToast('El producto fue agregado.');
       this.newProduct = {
@@ -66,10 +65,9 @@ export class AddProductsPage implements OnInit {
         cantidad: 0,
         categoria: 0,
         imagen: '',
-        user:1  // TODO: CAMBIAR POR LA VARIABLE DE USUARIO
+        user: this.user.user 
       };
     } else {
-      //mensajes de error vendran en la respuesta
       this.presentToast('Error al agregar el producto, revise los datos ingresado');
     }
   }
@@ -80,6 +78,9 @@ export class AddProductsPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  async back() {
+    this.router.navigate(['/home-provider']);
   }
 
 }

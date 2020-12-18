@@ -28,20 +28,21 @@ export class ProductsProviderPage implements OnInit {
   productos2:any;
   user: User = JSON.parse(localStorage.getItem('user'));
   idUser: Usuario = {
-    user: 0
+    user: -1
   }
   
   constructor(private connection: ConnectionService,
     private toastController: ToastController,
     private router: Router) { 
-      console.log(this.user);
       this.idUser = {
         user: this.user.user
       }
       this.getProductos();
     }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProductos();
+  }
 
   async getProductos() {
     const response = await this.connection.getProductsProvider(this.user);
@@ -52,6 +53,14 @@ export class ProductsProviderPage implements OnInit {
     localStorage.setItem('prodActProveedor', JSON.stringify(row));
     console.log(row)
     this.router.navigate(['/view-product-provider']);
+  }
+
+  async back() {
+    if(this.user.role){
+      this.router.navigate(['/home-client']);
+    }else{
+      this.router.navigate(['/home-provider']);
+    }
   }
   
 }
