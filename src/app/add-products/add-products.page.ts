@@ -16,6 +16,7 @@ export interface NuevoProducto {
   categoria: number;
   imagen: string;
   user: number;
+  descripcion: string;
 }
 
 @Component({
@@ -35,23 +36,29 @@ export class AddProductsPage implements OnInit {
     cantidad: 0,
     categoria: 0,
     imagen: '',
-    user: this.user.user  
+    user: this.user.user,
+    descripcion: ''
   };
 
   constructor(private connection: ConnectionService,
       private toastController: ToastController,
       private router: Router
     ) { 
+    this.categorias = [];
     this.getCategorias();
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    //this.categorias = [];
+    //this.getCategorias();
+  }
 
-  async getCategorias() {
+  async getCategorias(){
     const response = await this.connection.getCategorias();
     Object.keys(response).forEach (key =>{
       this.categorias.push({categoria: response[key] ['categoria'], nombre: response[key]['nombre']});
     });
+    console.log(this.categorias)
   }
   
   async addProducto() {
@@ -65,7 +72,8 @@ export class AddProductsPage implements OnInit {
         cantidad: 0,
         categoria: 0,
         imagen: '',
-        user: this.user.user 
+        user: this.user.user, 
+        descripcion:''
       };
     } else {
       this.presentToast('Error al agregar el producto, revise los datos ingresado');

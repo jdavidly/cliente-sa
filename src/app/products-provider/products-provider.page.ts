@@ -56,11 +56,7 @@ export class ProductsProviderPage implements OnInit {
   }
 
   async back() {
-    if(this.user.role){
-      this.router.navigate(['/home-client']);
-    }else{
       this.router.navigate(['/home-provider']);
-    }
   }
   
 }

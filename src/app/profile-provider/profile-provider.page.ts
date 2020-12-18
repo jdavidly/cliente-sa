@@ -9,18 +9,19 @@ import { User } from '../home-client/home-client.page';
 })
 export class ProfileProviderPage implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
+  tipoUser: string = "";
   constructor(private router: Router) {
-
+    if(this.user.role){
+      this.tipoUser = "Client"
+    }else {
+      this.tipoUser = "Provider"
+    }
   }
 
   ngOnInit() {
   }
   async back() {
-    if(this.user.role){
-      this.router.navigate(['/home-client']);
-    }else{
-      this.router.navigate(['/home-provider']);
-    }
+    this.router.navigate(['/home-provider']);
   }
 
 }

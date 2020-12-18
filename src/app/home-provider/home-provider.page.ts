@@ -27,4 +27,15 @@ export class HomeProviderPage implements OnInit {
     this.router.navigate(['/profile-provider']);
   }
 
+  async toBuy(){
+    this.router.navigate(['/home-client']);
+  }
+  async auction(){
+
+  }
+  async viewAuction(){
+
+  }
+
+
 }
