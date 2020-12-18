@@ -1,5 +1,24 @@
 .select-full-width {
-    max-width: 100% !important;
-    width: 100% !important;
-    padding-left: 0 !important;
-  }
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+}
+
+.tarjetaHome {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.imagenHome {
+  height: 200px;
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.background {
+  --background: url(../../assets/images/ecommerce-website-banner.jpg);
+}
