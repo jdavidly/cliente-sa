@@ -4,14 +4,17 @@
       <ion-title>
         Hola, {{user.first_name}}!
       </ion-title>
-      <ion-buttons slot="end">
-        <ion-button>
-          Carrito
-          <ion-badge slot="end">{{contador}}</ion-badge>
-        </ion-button>
-      </ion-buttons>
+      <ion-list slot="end">
+        <ion-item>
+          <ion-label>Carrito de compras</ion-label><ion-badge slot="end">{{contador}}</ion-badge>
+          <ion-select  (ionChange)="deleteOnCart($event)" okText="Eliminar" multiple="true" cancelText="Cancelar">
+            <ion-select-option *ngFor="let producto of carrito" [value]="producto.codigo">Cantidad: {{producto.cantidad}} {{producto.nombre}}</ion-select-option>            
+          </ion-select>
+        </ion-item>      
+      </ion-list> 
+      <ion-button slot="end" color="primary" (click)="goToPayment()">Confirmar Compra</ion-button> 
     </ion-toolbar>
-  </ion-header>
+  </ion-header>   
   <ion-row>
     <ion-col>
       <ion-card>

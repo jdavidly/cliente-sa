@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ProductDetailPage } from '../product-detail/product-detail.page';
 import { ConnectionService } from '../services/connection.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-client',
@@ -14,18 +15,25 @@ export class HomeClientPage implements OnInit {
   categorias: Categoria[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
   contador: number = 0;
+  carrito: ProductoCarrito[] = [];
 
   constructor(
     private connection: ConnectionService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
     this.connection.getCategories().subscribe((categorias: Categoria[]) => {
       this.categorias = categorias;
     });
     this.connection.getProducts().subscribe((products: Producto[]) => {
       this.productos = products;
+    });  
+    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>{      
+      this.carrito = carritos;
+      this.contador = carritos.length;      
     });
   }
 
@@ -41,6 +49,18 @@ export class HomeClientPage implements OnInit {
       });
     }
   }
+  
+  deleteOnCart(event: CustomEvent) 
+  {
+    const value = event.detail['value'];
+    console.log(value);
+    this.connection.removeCart(value); 
+    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>{      
+      this.carrito = carritos;
+      this.contador = carritos.length;      
+    });  
+  }
+
 
   async ver(producto: Producto) {
     const modal = await this.modalController.create({
@@ -56,6 +76,12 @@ export class HomeClientPage implements OnInit {
     });
     return await modal.present();
   }
+
+
+  goToPayment() {
+    //localStorage.setItem('user', this.user);
+    this.router.navigate(['/carrito']);
+  }  
 
 }
 
@@ -85,4 +111,12 @@ export interface User {
   phone_number: string;
   address: string;
   role: boolean;
+}
+
+export interface ProductoCarrito
+{
+  nombre: String;
+  precio: number;
+  cantidad: number;  
+  codigo: number;  
 }
