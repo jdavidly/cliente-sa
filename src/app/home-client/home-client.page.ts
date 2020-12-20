@@ -52,10 +52,10 @@ export class HomeClientPage implements OnInit {
   
   deleteOnCart(event: CustomEvent) 
   {
-    const value = event.detail['value'];
-    console.log(value);
+    const value = event.detail['value'];    
     this.connection.removeCart(value); 
-    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>{      
+    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>
+    {      
       this.carrito = carritos;
       this.contador = carritos.length;      
     });  
@@ -78,11 +78,15 @@ export class HomeClientPage implements OnInit {
   }
 
 
-  goToPayment() {
-    //localStorage.setItem('user', this.user);
+  goToPayment() 
+  {    
     this.router.navigate(['/carrito']);
   }  
 
+  goToHome()
+  {
+    this.router.navigate(['/home-client']);
+  }
 }
 
 export interface Producto {

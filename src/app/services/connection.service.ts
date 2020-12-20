@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Login, SigninClient, SigninProvider } from '../start/start.page';
 import { NuevoProducto } from '../add-products/add-products.page';
 import { Usuario } from '../products-provider/products-provider.page'
+import { ProductDelete } from '../products-provider/products-provider.page'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -56,9 +58,14 @@ export class ConnectionService {
     return this.http.post(`${this.url}cart/add`, { user, producto, cantidad }).toPromise();
   }
 
-  async removeCart(timestamp: Date)
+  async removeCart(timestamp: number)
   {
     return this.http.post(`${this.url}cart/remove`, {timestamp}).toPromise();
+  }
+
+  async removeBeforePayment(timestamp: number)
+  {
+    return this.http.post(`${this.url}cart/removeBeforePayment`, {timestamp}).toPromise();
   }
 
 

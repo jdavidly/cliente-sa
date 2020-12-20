@@ -2,7 +2,7 @@
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-title>
-        Hola, {{user.first_name}}!
+        Hola, {{user.first_name}}! Codigo: {{user.user}}
       </ion-title>
       <ion-list slot="end">
         <ion-item>
@@ -13,6 +13,7 @@
         </ion-item>      
       </ion-list> 
       <ion-button slot="end" color="primary" (click)="goToPayment()">Confirmar Compra</ion-button> 
+      <ion-button slot="end" color="primary" (click)="goToHome()">Home</ion-button> 
     </ion-toolbar>
   </ion-header>   
   <ion-row>

@@ -8,6 +8,10 @@ export interface Usuario {
   user: number;
 }
 
+export interface ProductDelete{
+  producto:number;
+}
+
 export interface Producto {
   producto: number;
   nombre: string;
