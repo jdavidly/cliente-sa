@@ -12,17 +12,17 @@ import { ProductUpdate } from '../view-product-provider/view-product-provider.pa
 })
 export class ConnectionService {
 
-  //url: string = 'http://localhost:3000/';
-  url: string = 'https://sa-proyecto.herokuapp.com/';
+  url: string = 'http://localhost:3000/';
+  //url: string = 'https://sa-proyecto.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
   async login(l: Login) {
-    return this.http.post(`${this.url}user/login`, l).toPromise();
+    return this.http.post(`${this.url}user/loginp`, l).toPromise();
   }
 
   async signinClient(s: SigninClient) {
-    return this.http.post(`${this.url}user/signinClient`, s).toPromise();
+    return this.http.post(`${this.url}user/signinClientp`, s).toPromise();
   }
 
   async signinProvider(s: SigninProvider) {
@@ -83,5 +83,9 @@ export class ConnectionService {
   }
 
   
+
+  getProductsByPage(page: number) {
+    return this.http.get(`${this.url}product/page/${page}`);
+  }
 
 }

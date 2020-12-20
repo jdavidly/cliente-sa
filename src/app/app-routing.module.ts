@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'view-product-provider',
-    loadChildren: () => import('./view-product-provider/view-product-provider.module').then( m => m.ViewProductProviderPageModule)
+    loadChildren: () => import('./view-product-provider/view-product-provider.module').then(m => m.ViewProductProviderPageModule)
   },
   {
     path: 'product-detail',
@@ -28,19 +28,26 @@ const routes: Routes = [
   },
   {
     path: 'home-provider',
-    loadChildren: () => import('./home-provider/home-provider.module').then( m => m.HomeProviderPageModule)
+    loadChildren: () => import('./home-provider/home-provider.module').then(m => m.HomeProviderPageModule)
   },
   {
     path: 'profile-provider',
-    loadChildren: () => import('./profile-provider/profile-provider.module').then( m => m.ProfileProviderPageModule)
+    loadChildren: () => import('./profile-provider/profile-provider.module').then(m => m.ProfileProviderPageModule)
   },
   {
     path: 'carrito',
-    loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
+    loadChildren: () => import('./carrito/carrito.module').then(m => m.CarritoPageModule)
+  },
+  {
+    path: 'profile-client',
+    loadChildren: () => import('./profile-client/profile-client.module').then(m => m.ProfileClientPageModule)
+  },
+  {
+    path: 'cart-client',
+    loadChildren: () => import('./cart-client/cart-client.module').then(m => m.CartClientPageModule)
   }
 
 ];
-
 
 @NgModule({
   imports: [
@@ -48,5 +55,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-
 export class AppRoutingModule { }

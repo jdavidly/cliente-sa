@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ProductDetailPage } from '../product-detail/product-detail.page';
 import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-home-client',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HomeClientPage implements OnInit {
 
-  productos: Producto[] = [];
+  //products: Producto[] = [];
   categorias: Categoria[] = [];
   user: User = JSON.parse(localStorage.getItem('user'));
   contador: number = 0;
@@ -20,20 +21,18 @@ export class HomeClientPage implements OnInit {
   constructor(
     private connection: ConnectionService,
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
+    public prodService: ProductsService
   ) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.connection.getCategories().subscribe((categorias: Categoria[]) => {
       this.categorias = categorias;
     });
-    this.connection.getProducts().subscribe((products: Producto[]) => {
-      this.productos = products;
-    });  
-    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>{      
+    this.prodService.get(1);
+    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) => {
       this.carrito = carritos;
-      this.contador = carritos.length;      
+      this.contador = carritos.length;
     });
   }
 
@@ -41,24 +40,23 @@ export class HomeClientPage implements OnInit {
     const value = event.detail['value'];
     if (value === '0') {
       this.connection.getProducts().subscribe((products: Producto[]) => {
-        this.productos = products;
+        this.prodService.products = products;
       });
     } else {
       this.connection.getProductsByCategory(value).subscribe((products: Producto[]) => {
-        this.productos = products;
+        this.prodService.products = products;
       });
     }
   }
-  
-  deleteOnCart(event: CustomEvent) 
-  {
-    const value = event.detail['value'];    
-    this.connection.removeCart(value); 
-    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) =>
-    {      
+
+  deleteOnCart(event: CustomEvent) {
+    const value = event.detail['value'];
+    console.log(value);
+    this.connection.removeCart(value);
+    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) => {
       this.carrito = carritos;
-      this.contador = carritos.length;      
-    });  
+      this.contador = carritos.length;
+    });
   }
 
 
@@ -81,12 +79,24 @@ export class HomeClientPage implements OnInit {
   goToPayment() 
   {    
     this.router.navigate(['/carrito']);
-  }  
+  }
 
   goToHome()
   {
     this.router.navigate(['/home-client']);
   }
+}
+
+export interface User {
+  user: number;
+  first_name: string;
+  last_name: string;
+  name: string;
+  email: string;
+  password: string;
+  phone_number: string;
+  address: string;
+  role: boolean;
 }
 
 export interface Producto {
@@ -105,22 +115,9 @@ export interface Categoria {
   categoria: number;
 }
 
-export interface User {
-  user: number;
-  first_name: string;
-  last_name: string;
-  name: string;
-  email: string;
-  password: string;
-  phone_number: string;
-  address: string;
-  role: boolean;
-}
-
-export interface ProductoCarrito
-{
+export interface ProductoCarrito {
   nombre: String;
   precio: number;
-  cantidad: number;  
-  codigo: number;  
+  cantidad: number;
+  codigo: number;
 }

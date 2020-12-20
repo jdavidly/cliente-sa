@@ -1,0 +1,23 @@
+<ion-row>
+  <ion-col></ion-col>
+  <ion-col></ion-col>
+  <ion-col></ion-col>
+  <ion-col></ion-col>
+  <ion-col>
+    <ion-button expand="block" (click)="previous()">
+      <ion-icon name="caret-back-outline"></ion-icon>
+    </ion-button>
+  </ion-col>
+  <ion-col size-xs="2" size-sm="2" size-md="2" size-lg="2" size-xl="2">
+    <h3 style="text-align: center;">{{prodService.current}}/{{prodService.pages}}</h3>
+  </ion-col>
+  <ion-col>
+    <ion-button expand="block" (click)="next()">
+      <ion-icon name="caret-forward-outline"></ion-icon>
+    </ion-button>
+  </ion-col>
+  <ion-col></ion-col>
+  <ion-col></ion-col>
+  <ion-col></ion-col>
+  <ion-col></ion-col>
+</ion-row>
