@@ -29,7 +29,15 @@ const routes: Routes = [
   {
     path: 'products-provider',
     loadChildren: () => import('./products-provider/products-provider.module').then(m => m.ProductsProviderPageModule)
+  },  {
+    path: 'profile-client',
+    loadChildren: () => import('./profile-client/profile-client.module').then( m => m.ProfileClientPageModule)
+  },
+  {
+    path: 'cart-client',
+    loadChildren: () => import('./cart-client/cart-client.module').then( m => m.CartClientPageModule)
   }
+
 
 ];
 

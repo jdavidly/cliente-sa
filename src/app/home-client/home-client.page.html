@@ -1,4 +1,5 @@
-<ion-content class="background">
+<ion-content class="fondo-imagen">
+  <app-bar></app-bar>
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-title>
@@ -6,15 +7,17 @@
       </ion-title>
       <ion-list slot="end">
         <ion-item>
-          <ion-label>Carrito de compras</ion-label><ion-badge slot="end">{{contador}}</ion-badge>
-          <ion-select  (ionChange)="deleteOnCart($event)" okText="Eliminar" multiple="true" cancelText="Cancelar">
-            <ion-select-option *ngFor="let producto of carrito" [value]="producto.codigo">Cantidad: {{producto.cantidad}} {{producto.nombre}}</ion-select-option>            
+          <ion-label>Carrito de compras</ion-label>
+          <ion-badge slot="end">{{contador}}</ion-badge>
+          <ion-select (ionChange)="deleteOnCart($event)" okText="Eliminar" multiple="true" cancelText="Cancelar">
+            <ion-select-option *ngFor="let producto of carrito" [value]="producto.codigo">Cantidad:
+              {{producto.cantidad}} {{producto.nombre}}</ion-select-option>
           </ion-select>
-        </ion-item>      
-      </ion-list> 
-      <ion-button slot="end" color="primary" (click)="goToPayment()">Confirmar Compra</ion-button> 
+        </ion-item>
+      </ion-list>
+      <ion-button slot="end" color="primary" (click)="goToPayment()">Confirmar Compra</ion-button>
     </ion-toolbar>
-  </ion-header>   
+  </ion-header>
   <ion-row>
     <ion-col>
       <ion-card>
@@ -30,7 +33,12 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col *ngFor="let producto of productos" size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
+    <ion-col>
+      <app-pagination></app-pagination>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let producto of prodService.products" size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
       <ion-card (click)="ver(producto)" button=true class="ion-activatable ripple-parent" class="tarjetaHome">
         <ion-img [src]="producto.url" class="imagenHome"></ion-img>
         <ion-card-header>

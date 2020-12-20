@@ -13,25 +13,25 @@ export class StartPage implements OnInit {
   esProveedor: boolean = false;
   tab: string = 'login';
   log: Login = {
-    email: 'jorge@gmail.com',
-    password: '123'
+    correo: 'jorge@gmail.com',
+    pass: '123'
   };
 
   signClient: SigninClient = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    password_repeated: '',
-    phone_number: ''
+    nombres: '',
+    nit: '',
+    edad: '',
+    correo: '',
+    pass: '',
+    telefono: ''
   };
 
   signProvider: SigninProvider = {
-    name: '',
-    email: '',
-    password: '',
-    password_repeated: '',
-    address: ''
+    nombres: '',
+    nit: '',
+    correo: '',
+    pass: '',
+    direccion: ''
   };
 
   constructor(
@@ -70,11 +70,10 @@ export class StartPage implements OnInit {
   async login() {
     const response = await this.connection.login(this.log);
     if (response['auth']) {
-      console.log(response);
-      this.log.email = '';
-      this.log.password = '';
+      this.log.correo = '';
+      this.log.pass = '';
       localStorage.setItem('user', JSON.stringify(response['result']));
-      if (response['result']['role'] === 1) {
+      if (response['result']['Tipo_Usuario'] === 0) {
         this.router.navigate(['/home-client']);
       } else {
         this.router.navigate(['/products-provider']);
@@ -95,23 +94,23 @@ export class StartPage implements OnInit {
 }
 
 export interface SigninClient {
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  password_repeated: string;
-  phone_number: string;
+  nombres: string;
+  nit: string;
+  edad: string;
+  correo: string;
+  pass: string;
+  telefono: string;
 }
 
 export interface SigninProvider {
-  name: string;
-  email: string;
-  password: string;
-  password_repeated: string;
-  address: string;
+  nombres: string;
+  nit: string;
+  correo: string;
+  pass: string;
+  direccion: string;
 }
 
 export interface Login {
-  email: string;
-  password: string;
+  correo: string;
+  pass: string;
 }

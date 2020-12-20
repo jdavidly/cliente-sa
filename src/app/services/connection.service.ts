@@ -16,11 +16,11 @@ export class ConnectionService {
   constructor(private http: HttpClient) { }
 
   async login(l: Login) {
-    return this.http.post(`${this.url}user/login`, l).toPromise();
+    return this.http.post(`${this.url}user/loginp`, l).toPromise();
   }
 
   async signinClient(s: SigninClient) {
-    return this.http.post(`${this.url}user/signinClient`, s).toPromise();
+    return this.http.post(`${this.url}user/signinClientp`, s).toPromise();
   }
 
   async signinProvider(s: SigninProvider) {
@@ -70,6 +70,10 @@ export class ConnectionService {
 
   async deletProduct(s: ProductDelete) {
     return this.http.post(`${this.url}product/delete`, s).toPromise();
+  }
+
+  getProductsByPage(page: number) {
+    return this.http.get(`${this.url}product/page/${page}`);
   }
 
 }
