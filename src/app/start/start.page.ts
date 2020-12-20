@@ -69,6 +69,7 @@ export class StartPage implements OnInit {
 
   async login() {
     const response = await this.connection.login(this.log);
+    console.log(response);
     if (response['auth']) {
       console.log(response);
       this.log.email = '';
