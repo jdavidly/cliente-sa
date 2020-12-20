@@ -5,6 +5,9 @@
 </ion-header>
 
 <ion-content class="bloque">
+  <br>
+  <ion-button color="warning" size="small" fill="outline" (click)="cancelar()">Back</ion-button>
+  <br>
   <ion-card class="bloque-Imagen">
     <ion-card-content>
       <img src={{producto.url}} alt="">
@@ -25,7 +28,7 @@
   <br>
   <ion-item>
     <ion-label>Cantidad:</ion-label>
-    <ion-label>{{producto.cantidad}}</ion-label>
+    <ion-input type="number" aria-placeholder="Cantidad" [(ngModel)]="producto.cantidad" clearInput required></ion-input>
   </ion-item>
   
   <br>

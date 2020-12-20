@@ -1,0 +1,72 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Hola, {{user.first_name}}!
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-row>
+    <ion-col  size-xs="8" size-sm="4" size-md="4" size-lg="3" size-xl="2">
+      <ion-card (click)="verProductos()" button=true>
+       <ion-img src="https://www.flaticon.es/svg/static/icons/svg/89/89739.svg"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Mis Productos</ion-card-title>
+          <ion-card-subtitle>Productos ingresados</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+    
+    <ion-col  size-xs="8" size-sm="4" size-md="4" size-lg="3" size-xl="2">
+      <ion-card (click)="addProducto()" button=true>
+       <ion-img src="https://image.flaticon.com/icons/png/512/32/32038.png"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Agregar Producto</ion-card-title>
+          <ion-card-subtitle>Ingresados un nuevo producto</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+
+    <ion-col  size-xs="8" size-sm="4" size-md="4" size-lg="3" size-xl="2">
+      <ion-card (click)="myProfile()" button=true>
+       <ion-img src="https://cdn.icon-icons.com/icons2/1904/PNG/512/profile_121261.png"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Mi Perfil</ion-card-title>
+          <ion-card-subtitle>Ver mis datos</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+
+    <ion-col  size-xs="8" size-sm="4" size-md="4" size-lg="3" size-xl="2">
+      <ion-card (click)="toBuy()" button=true>
+       <ion-img src="https://www.flaticon.es/svg/static/icons/svg/2825/2825720.svg"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Comprar</ion-card-title>
+          <ion-card-subtitle>Realizar compras</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+
+    <ion-col  size-xs="8" size-sm="4" size-md="4" size-lg="3" size-xl="2">
+      <ion-card (click)="auction()" button=true>
+       <ion-img src="data:image/png;base64,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"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Subastar</ion-card-title>
+          <ion-card-subtitle>Ingresar productos</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+    
+    <ion-col  size-xs="8" size-sm="4" size-md="4" size-lg="3" size-xl="2">
+      <ion-card (click)="viewAuction()" button=true>
+       <ion-img src="https://cdn.icon-icons.com/icons2/1215/PNG/512/1492532797-30-auction_83224.png"></ion-img>
+        <ion-card-header>
+          <ion-card-title>Ver Subastas</ion-card-title>
+          <ion-card-subtitle>Ver productos en subasta</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+</ion-content>

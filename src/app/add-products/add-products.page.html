@@ -5,8 +5,11 @@
 </ion-header>
 
 <ion-content class="bloque">
+  <br>
+  <ion-button color="warning" size="small" fill="outline" (click)="back()">Back</ion-button>
+  <br>
+  <div>
   <!-- Nombre del producto -->
-<div>
   <br>
   <ion-item>
     <ion-label position="floating">Nombre</ion-label>
@@ -44,9 +47,17 @@
     <ion-input type="text" aria-placeholder="Imagen" [(ngModel)]="newProduct.imagen" clearInput required></ion-input>
   </ion-item>
 
+  <!-- Descripcion del producto -->
+  <br>
+  <ion-item>
+    <ion-label position="floating">Descripcion:</ion-label>
+    <ion-input type="text" aria-placeholder="Descripcion del producto" [(ngModel)]="newProduct.descripcion" clearInput required
+    ></ion-input>
+  </ion-item>
+
   <!-- Nombre del producto -->
   <br>
-  <ion-button expand="block" (click)="addProducto()">Agregar Producto</ion-button>
+  <ion-button size="small" fill="outline" (click)="addProducto()">Agregar Producto</ion-button>
 
 </div>
 </ion-content>
