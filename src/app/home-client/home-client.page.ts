@@ -30,7 +30,7 @@ export class HomeClientPage implements OnInit {
       this.categorias = categorias;
     });
     this.prodService.get(1);
-    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) => {
+    this.connection.getCart(this.user.Id_Usuario).subscribe((carritos: ProductoCarrito[]) => {
       this.carrito = carritos;
       this.contador = carritos.length;
     });
@@ -38,22 +38,16 @@ export class HomeClientPage implements OnInit {
 
   categoryChange(event: CustomEvent) {
     const value = event.detail['value'];
-    if (value === '0') {
-      this.connection.getProducts().subscribe((products: Producto[]) => {
-        this.prodService.products = products;
-      });
-    } else {
-      this.connection.getProductsByCategory(value).subscribe((products: Producto[]) => {
-        this.prodService.products = products;
-      });
-    }
+    this.prodService.cat = value;
+    this.connection.getProductsByCategoryPage(value, this.prodService.current).subscribe((result) => {
+      this.prodService.products = result['products'];
+    });
   }
 
   deleteOnCart(event: CustomEvent) {
     const value = event.detail['value'];
-    console.log(value);
     this.connection.removeCart(value);
-    this.connection.getCart(this.user.user).subscribe((carritos: ProductoCarrito[]) => {
+    this.connection.getCart(this.user.Id_Usuario).subscribe((carritos: ProductoCarrito[]) => {
       this.carrito = carritos;
       this.contador = carritos.length;
     });
@@ -76,43 +70,44 @@ export class HomeClientPage implements OnInit {
   }
 
 
-  goToPayment() 
-  {    
+  goToPayment() {
     this.router.navigate(['/carrito']);
   }
 
-  goToHome()
-  {
+  goToHome() {
     this.router.navigate(['/home-client']);
   }
 }
 
 export interface User {
-  user: number;
-  first_name: string;
-  last_name: string;
-  name: string;
-  email: string;
-  password: string;
-  phone_number: string;
-  address: string;
-  role: boolean;
+
+  Id_Usuario: number;
+  Nombres: string;
+  NIT: string;
+  Edad: number;
+  correo: string;
+  Telefono: string;
+  Tipo_Usuario: number;
+  Direccion: string;
+  Pass: string;
 }
 
 export interface Producto {
-  nombre: string;
-  precio: number;
-  cantidad: number;
-  url: string;
-
-  producto: number;
-  categoria: number;
-  proveedor: number;
+  CATEGORIA_Id_Categoria: number;
+  Descripcion: string;
+  Forma_Venta: number;
+  Id_Producto: number;
+  Inventario: number;
+  Nombre: string;
+  Precio_Unitario: number;
+  USUARIO_Id_Usuario: number;
+  Url_: string;
 }
 
 export interface Categoria {
-  nombre: string;
-  categoria: number;
+  Nombre: string;
+  Id_Categoria: number;
+  Descripcion: string;
 }
 
 export interface ProductoCarrito {

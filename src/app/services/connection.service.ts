@@ -50,6 +50,10 @@ export class ConnectionService {
     return this.http.get(`${this.url}product/products/${category}`);
   }
 
+  getProductsByCategoryPage(category: number, page: number) {
+    return this.http.get(`${this.url}product/page/${category}/${page}`);
+  }
+
   getCart(user: number)
   {
     return this.http.get(`${this.url}cart/all/${user}`);

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from '../home-client/home-client.page';
 import { ConnectionService } from './connection.service';
@@ -8,8 +7,9 @@ import { ConnectionService } from './connection.service';
 })
 export class ProductsService {
 
+  public cat: number = -1;
   public current: number = 1;
-  public pages: number = 0;
+  public pages: number = 500;
   public products: Producto[] = [];
   //productos de subastas
 
@@ -18,9 +18,9 @@ export class ProductsService {
   ) { }
 
   public get(page: number) {
-    this.connection.getProductsByPage(page).subscribe((data) => {
-      this.pages = data['pages'];
+    this.connection.getProductsByCategoryPage(this.cat, page).subscribe((data) => {
       this.products = data['products'];
+      console.log(this.products);
     });
   }
 
