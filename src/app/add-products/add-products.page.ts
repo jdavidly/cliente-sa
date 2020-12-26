@@ -3,6 +3,7 @@ import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { User } from '../home-client/home-client.page';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface ObjCategoria {
   categoria: number;
@@ -11,12 +12,19 @@ export interface ObjCategoria {
 
 export interface NuevoProducto {
   nombre: string;
-  precio: number;
-  cantidad: number;
-  categoria: number;
-  imagen: string;
-  user: number;
   descripcion: string;
+  imagen: string;
+  precio: number;
+  user: number;
+  categoria: number;
+  cantidad: number;
+  forma:number
+}
+export interface Subasta {
+  producto: number;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  valor_inicial: number
 }
 
 @Component({
@@ -29,15 +37,21 @@ export interface NuevoProducto {
 export class AddProductsPage implements OnInit {
 
   categorias: ObjCategoria [] = [];
+  productoAgregado:number = -1;
   user: User = JSON.parse(localStorage.getItem('user'));
+  subastar: Subasta;
+  fecha1: Date;
+  fecha2: Date;
+
   newProduct: NuevoProducto = {
     nombre: '',
-    precio: 0,
-    cantidad: 0,
-    categoria: 0,
+    descripcion: '',
     imagen: '',
+    precio: 0,
     user: this.user.user,
-    descripcion: ''
+    categoria: 0,
+    cantidad: 0,
+    forma:-1
   };
 
   constructor(private connection: ConnectionService,
@@ -62,23 +76,55 @@ export class AddProductsPage implements OnInit {
   }
   
   async addProducto() {
+    this.newProduct.forma = 0;
     console.log(this.newProduct);
     const response = await this.connection.addProduct(this.newProduct);
     if (response['auth']) {
       this.presentToast('El producto fue agregado.');
       this.newProduct = {
         nombre: '',
-        precio: 0,
-        cantidad: 0,
-        categoria: 0,
+        descripcion: '',
         imagen: '',
-        user: this.user.user, 
-        descripcion:''
+        precio: 0,
+        user: this.user.user,
+        categoria: 0,
+        cantidad: 0,
+        forma:-1
       };
     } else {
       this.presentToast('Error al agregar el producto, revise los datos ingresado');
     }
   }
+
+  async addSubasta() {
+
+    this.newProduct.forma = 1;
+    
+    const response = await this.connection.addProduct(this.newProduct);
+    
+    if (response['auth']) {
+      this.presentToast('El producto fue agregado.');
+    } else {
+      this.productoAgregado = response[0][0]['id'];
+      this.subastar = {
+        producto: this.productoAgregado, 
+        fecha_inicio: this.fecha1,
+        fecha_fin: this.fecha2,
+        valor_inicial: this.newProduct.precio
+      }
+      const response2 = await this.connection.addSubasta(this.subastar);
+      if (response2['auth']) {
+        this.presentToast('El producto fue a la subasta.');
+      } else {
+        this.presentToast('Error al agregar el producto a la subasta');
+      }
+      this.presentToast('Error al agregar el producto, revise los datos ingresado');
+    }
+    
+
+    
+  }
+
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({

@@ -54,10 +54,22 @@
     <ion-input type="text" aria-placeholder="Descripcion del producto" [(ngModel)]="newProduct.descripcion" clearInput required
     ></ion-input>
   </ion-item>
+  <br>
+  <ion-item>
+    <ion-label position="floating">Fecha de inicio de la subasta:</ion-label>
+    <ion-datetime [(ngModel)]="fecha1" display-timezone="utc"></ion-datetime>
+  </ion-item>
+  <br>
+  <ion-item>
+    <ion-label position="floating">Fecha de fin de la subasta:</ion-label>
+    <ion-datetime [(ngModel)]="fecha2" display-timezone="utc"></ion-datetime>
+  </ion-item>
+
 
   <!-- Nombre del producto -->
   <br>
   <ion-button size="small" fill="outline" (click)="addProducto()">Agregar Producto</ion-button>
+  <ion-button size="small" fill="outline" (click)="addSubasta()">Subastar</ion-button>
 
 </div>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ConnectionService } from '../services/connection.service';
@@ -71,6 +71,7 @@ export class StartPage implements OnInit {
     const response = await this.connection.login(this.log);
     console.log(response);
     if (response['auth']) {
+      console.log("imprimiendo el response:")
       console.log(response);
       this.log.email = '';
       this.log.password = '';

@@ -51,6 +51,7 @@ export class ProductsProviderPage implements OnInit {
   async getProductos() {
     const response = await this.connection.getProductsProvider(this.user);
     this.productos2 = response;
+    console.log(this.productos2)
   }
   
   async viewDetails(row){

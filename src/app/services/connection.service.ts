@@ -5,6 +5,9 @@ import { NuevoProducto } from '../add-products/add-products.page';
 import { Usuario } from '../products-provider/products-provider.page';
 import { ProductDelete } from '../view-product-provider/view-product-provider.page';
 import { ProductUpdate } from '../view-product-provider/view-product-provider.page';
+import { Subasta } from '../add-products/add-products.page';
+import { ObjOferta } from '../ver-detalle-subasta/ver-detalle-subasta.page';
+
 
 
 @Injectable({
@@ -12,8 +15,8 @@ import { ProductUpdate } from '../view-product-provider/view-product-provider.pa
 })
 export class ConnectionService {
 
-  //url: string = 'http://localhost:3000/';
-  url: string = 'https://sa-proyecto.herokuapp.com/';
+  url: string = 'http://localhost:3000/';
+  //url: string = 'https://sa-proyecto.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
@@ -82,6 +85,22 @@ export class ConnectionService {
     return this.http.post(`${this.url}product/update-price`, s).toPromise();
   }
 
+  async addSubasta(s: Subasta) {
+    return this.http.post(`${this.url}product/addSubasta`, s).toPromise();
+  }
+
+  async getProductsSubasta(s: Usuario) {
+    return this.http.post(`${this.url}product/subasta`, s).toPromise();
+  }
+
+  
+  async getFormasPago() {
+    return this.http.get(`${this.url}product/formas-pago`).toPromise();
+  }
+
+  async ofertarSubasta(s: ObjOferta) {
+    return this.http.post(`${this.url}product/ofertarSubasta`, s).toPromise();
+  }
   
 
 }

@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-toolbar >
+    <ion-title>
+      Subastas Disponibles
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bloque">
+  <br>
+  <ion-button color="warning" size="small" fill="outline" (click)="back()">Back</ion-button>
+  <br>
+  
+  <br>
+  <ngx-datatable 
+    [rows]="subastas"
+    [ngClass]="tableStyle"
+    [rowHeight]="'auto'"
+    [headerHeight]="50"
+    [columnMode]="'force'"
+  >
+    <ngx-datatable-column name="nombre_producto"> </ngx-datatable-column>
+    <ngx-datatable-column name="Precio_Unitario"> </ngx-datatable-column>
+    <ngx-datatable-column name="Fecha_Hora_Inicio"> </ngx-datatable-column>
+    <ngx-datatable-column name="Fecha_Hora_Fin"> </ngx-datatable-column>
+    <ngx-datatable-column name="Actions" sortable="false">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <ion-button size="small" fill="outline" (click)="viewDetails(row)">Detalles</ion-button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</ion-content>

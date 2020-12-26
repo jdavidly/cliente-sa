@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles del Producto a Subastar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bloque">
+  <br>
+  <ion-button color="warning" size="small" fill="outline" (click)="cancelar()">Back</ion-button>
+  <br>
+  <ion-card class="bloque-Imagen">
+    <ion-card-content>
+      <img src={{producto.Url_}} alt="">
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <ion-item>
+    <ion-label>Nombre:</ion-label>
+    <ion-label>{{producto.nombre_producto}}</ion-label>
+  </ion-item>
+  
+  <br>
+  <ion-item>
+    <ion-label>Precio:</ion-label>
+    <ion-label>{{producto.Precio_Unitario}}</ion-label>
+  </ion-item>
+  
+  <br>
+  <ion-item>
+    <ion-label>Proveedor:</ion-label>
+    <ion-label>{{producto.Proveedor}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Categoria:</ion-label>
+    <ion-label>{{producto.categoria_producto}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Descripcion:</ion-label>
+    <ion-label>{{producto.desc_producto}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label>Tiempo restante:</ion-label>
+    <ion-label>{{producto.Fecha_Hora_Inicio}} al {{producto.Fecha_Hora_Fin}}</ion-label>
+  </ion-item>
+  
+  <br>
+  <ion-item>
+    <ion-label>Ingrese su Oferta:</ion-label>
+    <ion-input type="number" aria-placeholder="Cantidad" [(ngModel)]="oferta" clearInput required></ion-input>
+  </ion-item>
+
+  <br>
+  <ion-item>
+    <ion-label position="floating">Forma de pago:</ion-label>
+    <ion-select [compareWith]="compareWith" [(ngModel)]="forma_pago" clearInput required>
+      <ion-select-option *ngFor="let cate of formas" [value]="cate.id_forma">{{cate.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <br>
+  <ion-button color="success" size="small" fill="outline" (click)="ofertar()">Ofertar</ion-button>
+  <ion-button color="warning" size="small" fill="outline" (click)="cancelar()">Cancelar</ion-button>
+  <br><br>
+</ion-content>
