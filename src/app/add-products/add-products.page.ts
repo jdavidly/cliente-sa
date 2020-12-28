@@ -3,12 +3,13 @@ import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { User } from '../home-client/home-client.page';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Timestamp } from 'rxjs';
 
 export interface ObjCategoria {
   categoria: number;
   nombre: string;
 }
+
 
 export interface NuevoProducto {
   nombre: string;
@@ -20,6 +21,31 @@ export interface NuevoProducto {
   cantidad: number;
   forma:number
 }
+export interface ProductClient {
+  id_cliente: number;
+  nombre: string;
+  descripcion: string;
+  stock: number;
+  precio_venta: number;
+  foto: string;
+  fecha_subasta: Date;
+  precio_inicial_subasta: number;
+  precio_compralo_ahora: number;
+}
+
+export interface ProductProvider {
+  id_proveedor: number;
+  nombre: string;
+  descripcion: string;
+  stock: number;
+  precio_venta: number;
+  foto: string;
+  fecha_subasta: Date;
+  precio_inicial_subasta: number;
+  precio_compralo_ahora: number;
+}
+
+
 export interface Subasta {
   producto: number;
   fecha_inicio: Date;
@@ -33,7 +59,6 @@ export interface Subasta {
   styleUrls: ['./add-products.page.scss'],
 })
 
-
 export class AddProductsPage implements OnInit {
 
   categorias: ObjCategoria [] = [];
@@ -42,6 +67,28 @@ export class AddProductsPage implements OnInit {
   subastar: Subasta;
   fecha1: Date;
   fecha2: Date;
+  newProdProvider:ProductProvider ={
+    id_proveedor:0,
+    nombre: '',
+    descripcion: '',
+    stock: -1,
+    precio_venta: -1,
+    foto: '',
+    fecha_subasta: new Date(),
+    precio_inicial_subasta: -1,
+    precio_compralo_ahora: -1
+  };
+  newProdClient:ProductClient ={
+    id_cliente:0,
+    nombre: '',
+    descripcion: '',
+    stock: -1,
+    precio_venta: -1,
+    foto: '',
+    fecha_subasta: new Date(),
+    precio_inicial_subasta: -1,
+    precio_compralo_ahora: -1
+  };
 
   newProduct: NuevoProducto = {
     nombre: '',
@@ -77,8 +124,32 @@ export class AddProductsPage implements OnInit {
   
   async addProducto() {
     this.newProduct.forma = 0;
-    console.log(this.newProduct);
-    const response = await this.connection.addProduct(this.newProduct);
+    //console.log(this.newProduct);
+    let response;
+    if(this.user.Tipo_Usuario === 1){//PROVEEDOR
+      
+      console.log("proveedor");
+      this.newProdProvider.id_proveedor = this.newProduct.user;
+      this.newProdProvider.nombre = this.newProduct.nombre;
+      this.newProdProvider.descripcion = this.newProduct.descripcion;
+      this.newProdProvider.stock = this.newProduct.cantidad;
+      this.newProdProvider.precio_venta = this.newProduct.precio;
+      this.newProdProvider.foto = this.newProduct.imagen;
+      console.log(this.newProdProvider)
+      response = await this.connection.addProductProvider(this.newProdProvider);
+    
+    }else{// this.user.Tipo_Usuario === 0   // CLIENTE
+      console.log("cliente");
+      this.newProdClient.id_cliente = this.newProduct.user;
+      this.newProdClient.nombre = this.newProduct.nombre;
+      this.newProdClient.descripcion = this.newProduct.descripcion;
+      this.newProdClient.stock = this.newProduct.cantidad;
+      this.newProdClient.precio_venta = this.newProduct.precio;
+      this.newProdClient.foto = this.newProduct.imagen;
+
+      response = await this.connection.addProductClient(this.newProdClient);
+    }
+    
     if (response['auth']) {
       this.presentToast('El producto fue agregado.');
       this.newProduct = {
@@ -99,7 +170,6 @@ export class AddProductsPage implements OnInit {
   async addSubasta() {
 
     this.newProduct.forma = 1;
-    
     const response = await this.connection.addProduct(this.newProduct);
     
     if (response['auth']) {

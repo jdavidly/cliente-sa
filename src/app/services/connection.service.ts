@@ -9,7 +9,8 @@ import { Subasta } from '../add-products/add-products.page';
 import { ObjOferta } from '../ver-detalle-subasta/ver-detalle-subasta.page';
 import { User } from '../home-client/home-client.page';
 
-
+import { ProductProvider } from '../add-products/add-products.page';
+import { ProductClient } from '../add-products/add-products.page';
 
 @Injectable({
   providedIn: 'root'
@@ -112,4 +113,11 @@ export class ConnectionService {
     return this.http.get(`${this.url}product/page/${page}`);
   }
 
+  // PARA EL BUS DE INTEGRACION
+  async addProductProvider(s: ProductProvider) {
+    return this.http.post(`${this.url}crear-producto-proveedor`, s).toPromise();
+  }
+  async addProductClient(s: ProductClient) {
+    return this.http.post(`${this.url}crear-producto-cliente`, s).toPromise();
+  }
 }
