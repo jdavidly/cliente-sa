@@ -72,8 +72,8 @@
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
                   <ion-item>
-                    <ion-label position="floating">Nombre completo</ion-label>
-                    <ion-input type="text" placeholder="Jorge Lopez" [(ngModel)]="signClient.nombres" clearInput
+                    <ion-label position="floating">Nombre</ion-label>
+                    <ion-input type="text" placeholder="Jorge" [(ngModel)]="signClient.nombre" clearInput
                       required>
                     </ion-input>
                   </ion-item>
@@ -82,18 +82,8 @@
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
                   <ion-item>
-                    <ion-label position="floating">Nit</ion-label>
-                    <ion-input type="text" placeholder="123-4" [(ngModel)]="signClient.nit" clearInput
-                      required>
-                    </ion-input>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
-                  <ion-item>
-                    <ion-label position="floating">Edad</ion-label>
-                    <ion-input type="text" placeholder="18" [(ngModel)]="signClient.edad" clearInput
+                    <ion-label position="floating">Apellido</ion-label>
+                    <ion-input type="text" placeholder="Lopez" [(ngModel)]="signClient.apellido" clearInput
                       required>
                     </ion-input>
                   </ion-item>
@@ -103,7 +93,7 @@
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
                   <ion-item>
                     <ion-label position="floating">Correo electronico</ion-label>
-                    <ion-input type="text" placeholder="jorge@gmail.com" [(ngModel)]="signClient.correo" clearInput
+                    <ion-input type="text" placeholder="jorge@gmail.com" [(ngModel)]="signClient.email" clearInput
                       required>
                     </ion-input>
                   </ion-item>
@@ -112,8 +102,8 @@
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
                   <ion-item>
-                    <ion-label position="floating">Telefono</ion-label>
-                    <ion-input type="text" placeholder="34765489" [(ngModel)]="signClient.telefono" clearInput
+                    <ion-label position="floating">Celular</ion-label>
+                    <ion-input type="text" placeholder="34765489" [(ngModel)]="signClient.celular" clearInput
                       required>
                     </ion-input>
                   </ion-item>
@@ -123,7 +113,7 @@
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
                   <ion-item>
                     <ion-label type="text" position="floating">Contrasena</ion-label>
-                    <ion-input type="password" [(ngModel)]="signClient.pass" clearInput required minlength="8">
+                    <ion-input type="password" [(ngModel)]="signClient.contrasena" clearInput required minlength="8">
                     </ion-input>
                   </ion-item>
                 </ion-col>
