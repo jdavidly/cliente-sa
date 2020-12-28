@@ -31,10 +31,10 @@ export class HomeProviderPage implements OnInit {
     this.router.navigate(['/home-client']);
   }
   async auction(){
-
+    
   }
   async viewAuction(){
-
+    this.router.navigate(['/ver-subastas']);
   }
 
 

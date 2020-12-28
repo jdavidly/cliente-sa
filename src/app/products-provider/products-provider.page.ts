@@ -39,7 +39,7 @@ export class ProductsProviderPage implements OnInit {
     private toastController: ToastController,
     private router: Router) { 
       this.idUser = {
-        user: this.user.user
+        user: this.user.Id_Usuario
       }
       this.getProductos();
     }
@@ -51,6 +51,7 @@ export class ProductsProviderPage implements OnInit {
   async getProductos() {
     const response = await this.connection.getProductsProvider(this.user);
     this.productos2 = response;
+    console.log(this.productos2)
   }
   
   async viewDetails(row){

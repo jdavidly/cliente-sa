@@ -45,8 +45,15 @@ const routes: Routes = [
   {
     path: 'cart-client',
     loadChildren: () => import('./cart-client/cart-client.module').then(m => m.CartClientPageModule)
+  },
+  {
+    path: 'ver-subastas',
+    loadChildren: () => import('./ver-subastas/ver-subastas.module').then(m => m.VerSubastasPageModule)
+  },
+  {
+    path: 'ver-detalle-subasta',
+    loadChildren: () => import('./ver-detalle-subasta/ver-detalle-subasta.module').then(m => m.VerDetalleSubastaPageModule)
   }
-
 ];
 
 @NgModule({

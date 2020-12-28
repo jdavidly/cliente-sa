@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ConnectionService } from '../services/connection.service';
@@ -13,8 +13,8 @@ export class StartPage implements OnInit {
   esProveedor: boolean = false;
   tab: string = 'login';
   log: Login = {
-    correo: 'jorge@gmail.com',
-    pass: '123'
+    email: 'jorge@gmail.com',
+    contrasena: '123'
   };
 
   signClient: SigninClient = {
@@ -68,11 +68,12 @@ export class StartPage implements OnInit {
   }
 
   async login() {
+    console.log(this.log)
     const response = await this.connection.login(this.log);
     console.log(response);
     if (response['auth']) {
-      this.log.correo = '';
-      this.log.pass = '';
+      this.log.email = '';
+      this.log.contrasena = '';
       localStorage.setItem('user', JSON.stringify(response['result']));
       if (response['result']['Tipo_Usuario'] === 0) {
         this.router.navigate(['/home-client']);
@@ -112,6 +113,6 @@ export interface SigninProvider {
 }
 
 export interface Login {
-  correo: string;
-  pass: string;
+  email: string;
+  contrasena: string;
 }

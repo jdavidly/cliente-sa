@@ -80,7 +80,6 @@ export class HomeClientPage implements OnInit {
 }
 
 export interface User {
-
   Id_Usuario: number;
   Nombres: string;
   NIT: string;

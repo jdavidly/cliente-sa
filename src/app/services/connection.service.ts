@@ -5,7 +5,12 @@ import { NuevoProducto } from '../add-products/add-products.page';
 import { Usuario } from '../products-provider/products-provider.page';
 import { ProductDelete } from '../view-product-provider/view-product-provider.page';
 import { ProductUpdate } from '../view-product-provider/view-product-provider.page';
+import { Subasta } from '../add-products/add-products.page';
+import { ObjOferta } from '../ver-detalle-subasta/ver-detalle-subasta.page';
+import { User } from '../home-client/home-client.page';
 
+import { ProductProvider } from '../add-products/add-products.page';
+import { ProductClient } from '../add-products/add-products.page';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +80,7 @@ export class ConnectionService {
   }
 
 
-  async getProductsProvider(s: Usuario) {
+  async getProductsProvider(s: User) {
     return this.http.post(`${this.url}product/proveedor`, s).toPromise();
   }
 
@@ -86,10 +91,33 @@ export class ConnectionService {
     return this.http.post(`${this.url}product/update-price`, s).toPromise();
   }
 
+  async addSubasta(s: Subasta) {
+    return this.http.post(`${this.url}product/addSubasta`, s).toPromise();
+  }
+
+  async getProductsSubasta() {
+    return this.http.get(`${this.url}product/subasta`).toPromise();
+  }
+
+  
+  async getFormasPago() {
+    return this.http.get(`${this.url}product/formas-pago`).toPromise();
+  }
+
+  async ofertarSubasta(s: ObjOferta) {
+    return this.http.post(`${this.url}product/ofertarSubasta`, s).toPromise();
+  }
   
 
   getProductsByPage(page: number) {
     return this.http.get(`${this.url}product/page/${page}`);
   }
 
+  // PARA EL BUS DE INTEGRACION
+  async addProductProvider(s: ProductProvider) {
+    return this.http.post(`${this.url}crear-producto-proveedor`, s).toPromise();
+  }
+  async addProductClient(s: ProductClient) {
+    return this.http.post(`${this.url}crear-producto-cliente`, s).toPromise();
+  }
 }
