@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Detalles de {{producto.nombre}}</ion-title>
+    <ion-title>Detalles de {{producto.Nombre}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         Cerrar
@@ -10,16 +10,16 @@
 </ion-header>
 <ion-content>
   <ion-card>
-    <img [src]="producto.url" />
+    <img [src]="producto.Url_" />
     <ion-card-header>
-      <ion-card-title>Q. {{producto.precio}}</ion-card-title>
-      <ion-card-subtitle>Existencias: {{producto.cantidad - cantidad}}</ion-card-subtitle>
+      <ion-card-title>Q. {{producto.Precio_Unitario}}</ion-card-title>
+      <ion-card-subtitle>Existencias: {{producto.Inventario - cantidad}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <p>{{producto.descripcion}}</p>
+            <p>{{producto.Descripcion}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -27,7 +27,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size-xs="2">
-            <ion-input type="number" [(ngModel)]="cantidad" [(max)]="producto.cantidad" min="1"></ion-input>
+            <ion-input type="number" [(ngModel)]="cantidad" [(max)]="producto.Inventario" min="1"></ion-input>
           </ion-col>
           <ion-col size-xs="5">
             <ion-button (click)="agregar()" color="success" expand="block">

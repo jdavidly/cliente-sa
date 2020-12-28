@@ -48,7 +48,7 @@ export class AddProductsPage implements OnInit {
     descripcion: '',
     imagen: '',
     precio: 0,
-    user: this.user.user,
+    user: this.user.Id_Usuario,
     categoria: 0,
     cantidad: 0,
     forma:-1
@@ -86,7 +86,7 @@ export class AddProductsPage implements OnInit {
         descripcion: '',
         imagen: '',
         precio: 0,
-        user: this.user.user,
+        user: this.user.Id_Usuario,
         categoria: 0,
         cantidad: 0,
         forma:-1

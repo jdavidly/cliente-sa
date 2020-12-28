@@ -11,11 +11,13 @@ export class ProfileProviderPage implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   tipoUser: string = "";
   constructor(private router: Router) {
-    if(this.user.role){
+    
+    
+    /*if(this.user.role){
       this.tipoUser = "Client"
     }else {
       this.tipoUser = "Provider"
-    }
+    }*/
   }
 
   ngOnInit() {

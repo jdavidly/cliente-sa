@@ -7,6 +7,7 @@ import { ProductDelete } from '../view-product-provider/view-product-provider.pa
 import { ProductUpdate } from '../view-product-provider/view-product-provider.page';
 import { Subasta } from '../add-products/add-products.page';
 import { ObjOferta } from '../ver-detalle-subasta/ver-detalle-subasta.page';
+import { User } from '../home-client/home-client.page';
 
 
 
@@ -21,11 +22,11 @@ export class ConnectionService {
   constructor(private http: HttpClient) { }
 
   async login(l: Login) {
-    return this.http.post(`${this.url}user/login`, l).toPromise();
+    return this.http.post(`${this.url}user/loginp`, l).toPromise();
   }
 
   async signinClient(s: SigninClient) {
-    return this.http.post(`${this.url}user/signinClient`, s).toPromise();
+    return this.http.post(`${this.url}user/signinClientp`, s).toPromise();
   }
 
   async signinProvider(s: SigninProvider) {
@@ -53,6 +54,10 @@ export class ConnectionService {
     return this.http.get(`${this.url}product/products/${category}`);
   }
 
+  getProductsByCategoryPage(category: number, page: number) {
+    return this.http.get(`${this.url}product/page/${category}/${page}`);
+  }
+
   getCart(user: number)
   {
     return this.http.get(`${this.url}cart/all/${user}`);
@@ -74,7 +79,7 @@ export class ConnectionService {
   }
 
 
-  async getProductsProvider(s: Usuario) {
+  async getProductsProvider(s: User) {
     return this.http.post(`${this.url}product/proveedor`, s).toPromise();
   }
 
@@ -89,8 +94,8 @@ export class ConnectionService {
     return this.http.post(`${this.url}product/addSubasta`, s).toPromise();
   }
 
-  async getProductsSubasta(s: Usuario) {
-    return this.http.post(`${this.url}product/subasta`, s).toPromise();
+  async getProductsSubasta() {
+    return this.http.get(`${this.url}product/subasta`).toPromise();
   }
 
   
@@ -102,5 +107,9 @@ export class ConnectionService {
     return this.http.post(`${this.url}product/ofertarSubasta`, s).toPromise();
   }
   
+
+  getProductsByPage(page: number) {
+    return this.http.get(`${this.url}product/page/${page}`);
+  }
 
 }

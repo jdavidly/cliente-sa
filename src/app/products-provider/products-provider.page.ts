@@ -39,7 +39,7 @@ export class ProductsProviderPage implements OnInit {
     private toastController: ToastController,
     private router: Router) { 
       this.idUser = {
-        user: this.user.user
+        user: this.user.Id_Usuario
       }
       this.getProductos();
     }

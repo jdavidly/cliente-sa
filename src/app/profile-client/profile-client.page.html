@@ -1,0 +1,120 @@
+<ion-content class="fondo-imagen">
+  <app-bar></app-bar>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" size-xl="8">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Datos personales</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+              <ion-item>
+                <ion-label position="floating">Nombre completo</ion-label>
+                <ion-input type="text" [(ngModel)]="user.Nombres" clearInput required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+              <ion-item>
+                <ion-label position="floating">Correo</ion-label>
+                <ion-input type="text" [(ngModel)]="user.Correo" clearInput required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+              <ion-item>
+                <ion-label position="floating">Contrasena</ion-label>
+                <ion-input type="text" [(ngModel)]="user.Pass" clearInput required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+              <ion-item>
+                <ion-label position="floating">Celular</ion-label>
+                <ion-input type="text" [(ngModel)]="user.Telefono" clearInput required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+              <ion-button expand="full" (click)="update()">Actualizar datos</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" size-xl="8">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Tarjetas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row *ngFor="let card of cards; index as i">
+            <ion-col size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">
+              {{card.type}}
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
+              {{card.number}}
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
+              {{card.name}}
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">
+              <ion-button expand="block" color="success" *ngIf="!card.default" (click)="setDefault(card.card,i)">
+                Defecto
+              </ion-button>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="2" size-lg="2" size-xl="2">
+              <ion-button expand="block" color="danger" (click)="remove(card.card,i)">
+                Quitar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+              <ion-item>
+                <ion-select interface="popover" placeholder="Tipo de tarjeta" [(value)]="card.type">
+                  <ion-select-option value="credito">Credito</ion-select-option>
+                  <ion-select-option value="debito">Debito</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+              <ion-item>
+                <ion-label position="floating">Numero</ion-label>
+                <ion-input type="text" [(ngModel)]="card.number" clearInput required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
+              <ion-item>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input type="text" [(ngModel)]="card.name" clearInput required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+              <ion-button expand="full" (click)="add()">Agregar tarjeta</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-content>

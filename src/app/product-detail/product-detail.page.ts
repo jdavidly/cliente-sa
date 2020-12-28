@@ -21,7 +21,7 @@ export class ProductDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.producto);
+
   }
 
   dismiss() {
@@ -33,8 +33,8 @@ export class ProductDetailPage implements OnInit {
 
   async agregar() {
     this.compro = true;
-    const result = await this.connection.addToCart(this.user.user, this.producto.producto, this.cantidad);
-    console.log(result);
+    const result = await this.connection.addToCart(this.user.Id_Usuario, this.producto.Id_Producto, this.cantidad);
+    this.dismiss();
   }
 
 }

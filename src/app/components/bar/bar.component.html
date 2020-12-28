@@ -1,0 +1,18 @@
+<ion-toolbar color="primary">
+  <ion-title>Hola, {{user.Nombres}}!</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button [routerLink]="['/home-client']">
+      Inicio
+      <ion-icon slot="end" name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/profile-client']">
+      Perfil
+      <ion-icon slot="end" name="person-circle"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/cart-client']">
+      Carrito
+      <ion-icon slot="end" name="cart-outline"></ion-icon>
+      <ion-badge slot="end">1</ion-badge>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>

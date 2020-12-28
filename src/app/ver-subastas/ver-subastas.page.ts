@@ -18,7 +18,7 @@ export class VerSubastasPage implements OnInit {
 
   user: User = JSON.parse(localStorage.getItem('user'));
   idUser: Usuario = {
-    user: -1
+    user: this.user.Id_Usuario
   }
 
   constructor(private connection: ConnectionService,
@@ -26,12 +26,12 @@ export class VerSubastasPage implements OnInit {
 
   ngOnInit() {
     this.idUser = {
-      user: this.user.user
+      user: this.user.Id_Usuario
     }
     this.getProductosSubasta();
   }
   async getProductosSubasta() {
-    const response = await this.connection.getProductsSubasta(this.user);
+    const response = await this.connection.getProductsSubasta();
     this.subastas = response[0];
     console.log(this.subastas);
   }

@@ -1,29 +1,32 @@
-<ion-content class="background">
+<ion-content class="fondo-imagen">
+  <app-bar></app-bar>
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-title>
-        Hi, {{user.first_name}}! Codigo: {{user.user}}
+        Hi, {{user.Nombres}}! Codigo: {{user.Id_Usuario}}
       </ion-title>
       <ion-list slot="end">
         <ion-item>
-          <ion-label>Carrito de compras</ion-label><ion-badge slot="end">{{contador}}</ion-badge>
-          <ion-select  (ionChange)="deleteOnCart($event)" okText="Eliminar" multiple="true" cancelText="Cancelar">
-            <ion-select-option *ngFor="let producto of carrito" [value]="producto.codigo">Cantidad: {{producto.cantidad}} {{producto.nombre}}</ion-select-option>            
+          <ion-label>Carrito de compras</ion-label>
+          <ion-badge slot="end">{{contador}}</ion-badge>
+          <ion-select (ionChange)="deleteOnCart($event)" okText="Eliminar" multiple="true" cancelText="Cancelar">
+            <ion-select-option *ngFor="let producto of carrito" [value]="producto.codigo">Cantidad:
+              {{producto.cantidad}} {{producto.nombre}}</ion-select-option>
           </ion-select>
-        </ion-item>      
-      </ion-list> 
-      <ion-button slot="end" color="primary" (click)="goToPayment()">Confirmar Compra</ion-button> 
-      <ion-button slot="end" color="primary" (click)="goToHome()">Home</ion-button> 
+        </ion-item>
+      </ion-list>
+      <ion-button slot="end" color="primary" (click)="goToHome()">Home</ion-button>
+      <ion-button slot="end" color="primary" (click)="goToPayment()">Confirmar Compra</ion-button>
     </ion-toolbar>
-  </ion-header>   
+  </ion-header>
   <ion-row>
     <ion-col>
       <ion-card>
         <ion-item>
           <ion-label>Filtrar por categorias</ion-label>
           <ion-select interface="popover" (ionChange)="categoryChange($event)">
-            <ion-select-option value="0">Todos</ion-select-option>
-            <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.categoria">{{categoria.nombre}}
+            <ion-select-option value="-1">Todos</ion-select-option>
+            <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.Id_Categoria">{{categoria.Nombre}}
             </ion-select-option>
           </ion-select>
         </ion-item>
@@ -31,12 +34,17 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col *ngFor="let producto of productos" size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
+    <ion-col>
+      <app-pagination></app-pagination>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let producto of prodService.products" size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3">
       <ion-card (click)="ver(producto)" button=true class="ion-activatable ripple-parent" class="tarjetaHome">
-        <ion-img [src]="producto.url" class="imagenHome"></ion-img>
+        <ion-img [src]="producto.Url_" class="imagenHome"></ion-img>
         <ion-card-header>
-          <ion-card-title>{{producto.nombre}}</ion-card-title>
-          <ion-card-subtitle>Q. {{producto.precio}}</ion-card-subtitle>
+          <ion-card-title>{{producto.Nombre}}</ion-card-title>
+          <ion-card-subtitle>Q. {{producto.Precio_Unitario}}</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
     </ion-col>
