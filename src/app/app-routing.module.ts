@@ -64,6 +64,18 @@ const routes: Routes = [
   {
     path: 'compra-externa-carrito',
     loadChildren: () => import('./compra-externa-carrito/compra-externa-carrito.module').then( m => m.CompraExternaCarritoPageModule)
+  },
+  {
+    path: 'compra-local',
+    loadChildren: () => import('./compra-local/compra-local.module').then( m => m.CompraLocalPageModule)
+  },
+  {
+    path: 'compra-local-carrito',
+    loadChildren: () => import('./compra-local-carrito/compra-local-carrito.module').then( m => m.CompraLocalCarritoPageModule)
+  },
+  {
+    path: 'compra-local-details',
+    loadChildren: () => import('./compra-local-details/compra-local-details.module').then( m => m.CompraLocalDetailsPageModule)
   }
 
 ];

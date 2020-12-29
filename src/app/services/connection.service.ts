@@ -40,18 +40,29 @@ export class ConnectionService {
     }
   }
 
-
+  // -------------------- BUS DE INTEGRACION --------------------
   async login(l: Login) {
     return this.http.post(`${this.url}login-cliente`, l).toPromise();
   }
-
   async signinClient(s: SigninClient) {
     return this.http.post(`${this.url}registrar-cliente`, s).toPromise();
   }
-
   async signinProvider(s: SigninProvider) {
     return this.http.post(`${this.url}registrar-proveedor`, s).toPromise();
   }
+  async addProductProvider(s: ProductProvider) {
+    return this.http.post(`${this.urlBus}crear-producto-proveedor`, s).toPromise();
+  }
+  async addProductClient(s: ProductClient) {
+    return this.http.post(`${this.urlBus}crear-producto-cliente`, s).toPromise();
+  }
+  async getProductsExtern() {
+    return this.http.get(`${this.urlBus}ver-productos`).toPromise();
+  }
+  async comprar(s: Compra) {
+    return this.http.post(`${this.urlBus}realizar-compra`, s).toPromise();
+  }
+  // ------------------------------------------------------------
 
   async getCategorias() {
     return this.http.get(`${this.url}product/categorias`).toPromise();
@@ -127,19 +138,7 @@ export class ConnectionService {
     return this.http.get(`${this.url}product/page/${page}`);
   }
 
-  // PARA EL BUS DE INTEGRACION
-  async addProductProvider(s: ProductProvider) {
-    return this.http.post(`${this.urlBus}crear-producto-proveedor`, s).toPromise();
-  }
-  async addProductClient(s: ProductClient) {
-    return this.http.post(`${this.urlBus}crear-producto-cliente`, s).toPromise();
-  }
-  async getProductsExtern() {
-    return this.http.get(`${this.urlBus}ver-productos`).toPromise();
-  }
-  async comprar(s: Compra) {
-    return this.http.post(`${this.urlBus}realizar-compra`, s).toPromise();
-  }
+  
 
   
 

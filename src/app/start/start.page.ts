@@ -33,7 +33,7 @@ export class StartPage implements OnInit {
     contrasena: '',
     direccion: ''
   };
-  ConexionGrupo:number = 17;
+  ConexionGrupo:number = 14;
 
   constructor(
     private connection: ConnectionService,
