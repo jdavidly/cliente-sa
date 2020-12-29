@@ -18,19 +18,19 @@ export class StartPage implements OnInit {
   };
 
   signClient: SigninClient = {
-    nombres: '',
-    nit: '',
-    edad: '',
-    correo: '',
-    pass: '',
-    telefono: ''
+    nombre: '',
+    apellido: '',
+    email: '',
+    contrasena: '',
+    celular: ''
   };
 
   signProvider: SigninProvider = {
-    nombres: '',
-    nit: '',
-    correo: '',
-    pass: '',
+    nombre: '',
+    apellido: '',
+    empresa: '',
+    email: '',
+    contrasena: '',
     direccion: ''
   };
 
@@ -96,19 +96,19 @@ export class StartPage implements OnInit {
 }
 
 export interface SigninClient {
-  nombres: string;
-  nit: string;
-  edad: string;
-  correo: string;
-  pass: string;
-  telefono: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  contrasena: string;
+  celular: string;
 }
 
 export interface SigninProvider {
-  nombres: string;
-  nit: string;
-  correo: string;
-  pass: string;
+  nombre: string;
+  apellido: string;
+  empresa: string;
+  email: string;
+  contrasena: string;
   direccion: string;
 }
 
