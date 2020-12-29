@@ -42,15 +42,15 @@ export class ConnectionService {
 
 
   async login(l: Login) {
-    return this.http.post(`${this.url}user/loginp`, l).toPromise();
+    return this.http.post(`${this.url}login-cliente`, l).toPromise();
   }
 
   async signinClient(s: SigninClient) {
-    return this.http.post(`${this.url}user/signinClientp`, s).toPromise();
+    return this.http.post(`${this.url}registrar-cliente`, s).toPromise();
   }
 
   async signinProvider(s: SigninProvider) {
-    return this.http.post(`${this.url}user/signinProvider`, s).toPromise();
+    return this.http.post(`${this.url}registrar-proveedor`, s).toPromise();
   }
 
   async getCategorias() {
