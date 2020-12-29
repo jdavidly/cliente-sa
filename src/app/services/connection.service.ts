@@ -18,11 +18,28 @@ import { Compra } from '../compra-externa-carrito/compra-externa-carrito.page';
 })
 export class ConnectionService {
 
+  ConexionGrupo:number = JSON.parse(localStorage.getItem('ConexionGrupo'));
+
   urlBus: string = 'http://localhost:3000/';
   url: string = 'http://localhost:3000/';
   //url: string = 'https://sa-proyecto.herokuapp.com/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { this.establecerConexion(); }
+
+  async establecerConexion(){
+    this.ConexionGrupo = JSON.parse(localStorage.getItem('ConexionGrupo'));
+    switch(this.ConexionGrupo){
+      case 1:{  this.urlBus = "http://busg1.us-e2.cloudhub.io/";   break; }
+      case 3:{  this.urlBus = "http://35.206.98.190/";   break; }
+      case 4:{  this.urlBus = "http://esb4.djgg.ml:3030/";   break; }
+      case 5:{  this.urlBus = "http://34.123.238.63:8280/services/integrador/";   break; }
+      case 7:{  this.urlBus = "http://68.183.102.104:3000/";   break; }
+      case 9:{  this.urlBus = "http://sa-g9.us-e2.cloudhub.io/";   break; }
+
+      default:{ this.urlBus = "http://localhost:3000/";   break; }
+    }
+  }
+
 
   async login(l: Login) {
     return this.http.post(`${this.url}user/loginp`, l).toPromise();
@@ -35,7 +52,6 @@ export class ConnectionService {
   async signinProvider(s: SigninProvider) {
     return this.http.post(`${this.url}user/signinProvider`, s).toPromise();
   }
-
 
   async getCategorias() {
     return this.http.get(`${this.url}product/categorias`).toPromise();
@@ -65,7 +81,6 @@ export class ConnectionService {
   {
     return this.http.get(`${this.url}cart/all/${user}`);
   }
-  
 
   async addToCart(user: number, producto: number, cantidad: number) {
     return this.http.post(`${this.url}cart/add`, { user, producto, cantidad }).toPromise();
@@ -80,7 +95,6 @@ export class ConnectionService {
   {
     return this.http.post(`${this.url}cart/removeBeforePayment`, {timestamp}).toPromise();
   }
-
 
   async getProductsProvider(s: User) {
     return this.http.post(`${this.url}product/proveedor`, s).toPromise();
@@ -101,7 +115,6 @@ export class ConnectionService {
     return this.http.get(`${this.url}product/subasta`).toPromise();
   }
 
-  
   async getFormasPago() {
     return this.http.get(`${this.url}product/formas-pago`).toPromise();
   }
@@ -110,7 +123,6 @@ export class ConnectionService {
     return this.http.post(`${this.url}product/ofertarSubasta`, s).toPromise();
   }
   
-
   getProductsByPage(page: number) {
     return this.http.get(`${this.url}product/page/${page}`);
   }
@@ -128,4 +140,7 @@ export class ConnectionService {
   async comprar(s: Compra) {
     return this.http.post(`${this.urlBus}realizar-compra`, s).toPromise();
   }
+
+  
+
 }

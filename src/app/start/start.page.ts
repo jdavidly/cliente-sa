@@ -33,6 +33,7 @@ export class StartPage implements OnInit {
     contrasena: '',
     direccion: ''
   };
+  ConexionGrupo:number = 17;
 
   constructor(
     private connection: ConnectionService,
@@ -44,6 +45,7 @@ export class StartPage implements OnInit {
   }
 
   async signinClient() {
+    localStorage.setItem('ConexionGrupo', JSON.stringify(this.ConexionGrupo));
     const response = await this.connection.signinClient(this.signClient);
     if (response['auth']) {
       //limpiar los campos
@@ -56,6 +58,7 @@ export class StartPage implements OnInit {
   }
 
   async signinProvider() {
+    localStorage.setItem('ConexionGrupo', JSON.stringify(this.ConexionGrupo));
     const response = await this.connection.signinProvider(this.signProvider);
     if (response['auth']) {
       //limpiar los campos
@@ -68,6 +71,7 @@ export class StartPage implements OnInit {
   }
 
   async login() {
+    localStorage.setItem('ConexionGrupo', JSON.stringify(this.ConexionGrupo));
     console.log(this.log)
     const response = await this.connection.login(this.log);
     console.log(response);

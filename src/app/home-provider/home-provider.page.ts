@@ -36,6 +36,10 @@ export class HomeProviderPage implements OnInit {
   async viewAuction(){
     this.router.navigate(['/ver-subastas']);
   }
+  
+  async compraExterna(){
+    this.router.navigate(['/compra-externa']);
+  }
 
 
 }

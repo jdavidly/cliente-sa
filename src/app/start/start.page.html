@@ -10,8 +10,8 @@
       <ion-label>Registro</ion-label>
     </ion-segment-button>
   </ion-segment>
-
   <div [ngSwitch]="tab">
+    <!--    LOGIN     -->
     <div *ngSwitchCase="'login'">
       <ion-row>
         <ion-col></ion-col>
@@ -38,6 +38,20 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
+
+              <ion-item>
+                <ion-label>Seleccionar Conexión</ion-label>
+                <ion-select value="brown" okText="Ok" cancelText="Cancel" [(ngModel)]="ConexionGrupo">
+                  <ion-select-option value="17">Local</ion-select-option>
+                  <ion-select-option value="1">Grupo 1</ion-select-option>
+                  <ion-select-option value="3">Grupo 3</ion-select-option>
+                  <ion-select-option value="4">Grupo 4</ion-select-option>
+                  <ion-select-option value="5">Grupo 5</ion-select-option>
+                  <ion-select-option value="7">Grupo 7</ion-select-option>
+                  <ion-select-option value="9">Grupo 9</ion-select-option>
+                </ion-select>
+              </ion-item>
+
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
                   <ion-button expand="full" (click)="login()">Ingresar</ion-button>
@@ -49,6 +63,7 @@
         <ion-col></ion-col>
       </ion-row>
     </div>
+    <!--    REGISTRARSE     -->
     <div *ngSwitchCase="'signin'">
       <ion-row>
         <ion-col></ion-col>
@@ -118,6 +133,20 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
+
+              <ion-item>
+                <ion-label>Seleccionar Conexión</ion-label>
+                <ion-select value="brown" okText="Ok" cancelText="Cancel">
+                  <ion-select-option value="17">Local</ion-select-option>
+                  <ion-select-option value="1">Grupo 1</ion-select-option>
+                  <ion-select-option value="3">Grupo 3</ion-select-option>
+                  <ion-select-option value="4">Grupo 4</ion-select-option>
+                  <ion-select-option value="5">Grupo 5</ion-select-option>
+                  <ion-select-option value="7">Grupo 7</ion-select-option>
+                  <ion-select-option value="9">Grupo 9</ion-select-option>
+                </ion-select>
+              </ion-item>
+
               <ion-row>
                 <ion-col>
                   <ion-button expand="block" (click)="signinClient()">
@@ -198,6 +227,20 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
+
+              <ion-item>
+                <ion-label>Seleccionar Conexión</ion-label>
+                <ion-select value="brown" okText="Ok" cancelText="Cancel" [(ngModel)]="ConexionGrupo">
+                  <ion-select-option value="17">Local</ion-select-option>
+                  <ion-select-option value="1">Grupo 1</ion-select-option>
+                  <ion-select-option value="3">Grupo 3</ion-select-option>
+                  <ion-select-option value="4">Grupo 4</ion-select-option>
+                  <ion-select-option value="5">Grupo 5</ion-select-option>
+                  <ion-select-option value="7">Grupo 7</ion-select-option>
+                  <ion-select-option value="9">Grupo 9</ion-select-option>
+                </ion-select>
+              </ion-item>
+
               <ion-row>
                 <ion-col>
                   <ion-button expand="block" (click)="signinProvider()">
