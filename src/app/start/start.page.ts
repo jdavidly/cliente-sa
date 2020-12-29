@@ -26,10 +26,11 @@ export class StartPage implements OnInit {
   };
 
   signProvider: SigninProvider = {
-    nombres: '',
-    nit: '',
-    correo: '',
-    pass: '',
+    nombre: '',
+    apellido: '',
+    empresa: '',
+    email: '',
+    contrasena: '',
     direccion: ''
   };
 
@@ -103,10 +104,11 @@ export interface SigninClient {
 }
 
 export interface SigninProvider {
-  nombres: string;
-  nit: string;
-  correo: string;
-  pass: string;
+  nombre: string;
+  apellido: string;
+  empresa: string;
+  email: string;
+  contrasena: string;
   direccion: string;
 }
 
