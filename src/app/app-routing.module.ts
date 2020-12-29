@@ -53,7 +53,19 @@ const routes: Routes = [
   {
     path: 'ver-detalle-subasta',
     loadChildren: () => import('./ver-detalle-subasta/ver-detalle-subasta.module').then(m => m.VerDetalleSubastaPageModule)
+  },  {
+    path: 'compra-externa',
+    loadChildren: () => import('./compra-externa/compra-externa.module').then( m => m.CompraExternaPageModule)
+  },
+  {
+    path: 'compra-externa-details',
+    loadChildren: () => import('./compra-externa-details/compra-externa-details.module').then( m => m.CompraExternaDetailsPageModule)
+  },
+  {
+    path: 'compra-externa-carrito',
+    loadChildren: () => import('./compra-externa-carrito/compra-externa-carrito.module').then( m => m.CompraExternaCarritoPageModule)
   }
+
 ];
 
 @NgModule({

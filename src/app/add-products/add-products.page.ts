@@ -150,7 +150,7 @@ export class AddProductsPage implements OnInit {
       response = await this.connection.addProductClient(this.newProdClient);
     }
     
-    if (response['auth']) {
+    if (response['status'] == 'success') {
       this.presentToast('El producto fue agregado.');
       this.newProduct = {
         nombre: '',

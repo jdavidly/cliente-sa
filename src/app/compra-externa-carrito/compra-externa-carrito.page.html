@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-toolbar >
+    <ion-title>
+      Productos en su Carrito
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bloque">
+  <br>
+  <ion-button color="warning" size="small" fill="outline" (click)="back()">Back</ion-button>
+  <br>
+  
+  <br>
+  <ngx-datatable 
+    [rows]="productosCarrito"
+    [ngClass]="tableStyle"
+    [rowHeight]="'auto'"
+    [headerHeight]="50"
+    [columnMode]="'force'"
+  >
+    <ngx-datatable-column name="nombre"> </ngx-datatable-column>
+    <ngx-datatable-column name="cantidad"></ngx-datatable-column>
+    <ngx-datatable-column name="precio"></ngx-datatable-column>
+    <ngx-datatable-column name="subtotal"></ngx-datatable-column>
+  </ngx-datatable>
+  <br>
+  <ion-item>
+    <ion-label>Total:</ion-label>
+    <ion-label>{{Total}}</ion-label>
+  </ion-item>
+
+  <br>
+  <ion-button color="success" size="small" fill="outline" (click)="buyNow()">Buy Now :)</ion-button>
+  <br>
+</ion-content>

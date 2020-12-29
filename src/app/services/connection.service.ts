@@ -11,12 +11,14 @@ import { User } from '../home-client/home-client.page';
 
 import { ProductProvider } from '../add-products/add-products.page';
 import { ProductClient } from '../add-products/add-products.page';
+import { Compra } from '../compra-externa-carrito/compra-externa-carrito.page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionService {
 
+  urlBus: string = 'http://localhost:3000/';
   url: string = 'http://localhost:3000/';
   //url: string = 'https://sa-proyecto.herokuapp.com/';
 
@@ -115,9 +117,15 @@ export class ConnectionService {
 
   // PARA EL BUS DE INTEGRACION
   async addProductProvider(s: ProductProvider) {
-    return this.http.post(`${this.url}crear-producto-proveedor`, s).toPromise();
+    return this.http.post(`${this.urlBus}crear-producto-proveedor`, s).toPromise();
   }
   async addProductClient(s: ProductClient) {
-    return this.http.post(`${this.url}crear-producto-cliente`, s).toPromise();
+    return this.http.post(`${this.urlBus}crear-producto-cliente`, s).toPromise();
+  }
+  async getProductsExtern() {
+    return this.http.get(`${this.urlBus}ver-productos`).toPromise();
+  }
+  async comprar(s: Compra) {
+    return this.http.post(`${this.urlBus}realizar-compra`, s).toPromise();
   }
 }
