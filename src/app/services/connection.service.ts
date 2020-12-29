@@ -25,15 +25,15 @@ export class ConnectionService {
   constructor(private http: HttpClient) { }
 
   async login(l: Login) {
-    return this.http.post(`${this.url}user/login-cliente`, l).toPromise();
+    return this.http.post(`${this.url}login-cliente`, l).toPromise();
   }
 
   async signinClient(s: SigninClient) {
-    return this.http.post(`${this.url}user/registrar-cliente`, s).toPromise();
+    return this.http.post(`${this.url}registrar-cliente`, s).toPromise();
   }
 
   async signinProvider(s: SigninProvider) {
-    return this.http.post(`${this.url}user/registrar-proveedor`, s).toPromise();
+    return this.http.post(`${this.url}registrar-proveedor`, s).toPromise();
   }
 
 
