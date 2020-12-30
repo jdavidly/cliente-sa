@@ -65,7 +65,7 @@ export class CompraExternaCarritoPage implements OnInit {
           let pt = this.productosCarrito[y] as ProductoCarrito;
           if(p.id_producto == pt.id_producto){
             pt.cantidad ++;
-            pt.subtotal = pt.subtotal + pt.precio;
+            pt.subtotal = parseFloat(pt.subtotal.toString()) + parseFloat(pt.precio.toString());
             agregado = true;
             break;
           }
@@ -88,7 +88,7 @@ export class CompraExternaCarritoPage implements OnInit {
   async getTotal() {
     for (let y = 0; y < this.productosCarrito.length; y++) {
       let pt = this.productosCarrito[y] as ProductoCarrito;
-      this.Total = this.Total + pt.subtotal;
+      this.Total = this.Total + parseFloat(pt.subtotal.toString());
     }
   }
 
@@ -122,9 +122,10 @@ export class CompraExternaCarritoPage implements OnInit {
       this.productosEnCarrito.push(this.productoEnCarritoTemporal);
     }
     this.compra = {
-      id_cliente:this.user.Id_Usuario,
+      id_cliente:this.user.id,
       productos: this.productosEnCarrito
     }
+    console.log(JSON.parse(localStorage.getItem('user')));
     console.log(this.compra);
     const response = await this.connection.comprar(this.compra);
   }

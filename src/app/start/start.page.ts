@@ -72,18 +72,15 @@ export class StartPage implements OnInit {
 
   async login() {
     localStorage.setItem('ConexionGrupo', JSON.stringify(this.ConexionGrupo));
-    console.log(this.log)
     const response = await this.connection.login(this.log);
     console.log(response);
-    if (response['auth']) {
+    console.log(response['status']);
+    if (response['status'] === 'success') {
       this.log.email = '';
       this.log.contrasena = '';
-      localStorage.setItem('user', JSON.stringify(response['result']));
-      if (response['result']['Tipo_Usuario'] === 0) {
-        this.router.navigate(['/home-client']);
-      } else {
-        this.router.navigate(['/home-provider']);
-      }
+      localStorage.setItem('user', JSON.stringify(response['data']));
+      this.router.navigate(['/home-provider']);
+      
     } else {
       this.presentToast('El correo o contrasena son incorrectos');
     }

@@ -6,8 +6,8 @@ import { User } from '../home-client/home-client.page';
 import { Timestamp } from 'rxjs';
 
 export interface ObjCategoria {
-  categoria: number;
-  nombre: string;
+  Id_Categoria: number;
+  Nombre: string;
 }
 
 
@@ -67,6 +67,8 @@ export class AddProductsPage implements OnInit {
   subastar: Subasta;
   fecha1: Date;
   fecha2: Date;
+
+  esProveedor: boolean = false;
   newProdProvider:ProductProvider ={
     id_proveedor:0,
     nombre: '',
@@ -95,7 +97,7 @@ export class AddProductsPage implements OnInit {
     descripcion: '',
     imagen: '',
     precio: 0,
-    user: this.user.Id_Usuario,
+    user: this.user.id,
     categoria: 0,
     cantidad: 0,
     forma:-1
@@ -116,8 +118,9 @@ export class AddProductsPage implements OnInit {
 
   async getCategorias(){
     const response = await this.connection.getCategorias();
+    console.log(response)
     Object.keys(response).forEach (key =>{
-      this.categorias.push({categoria: response[key] ['categoria'], nombre: response[key]['nombre']});
+      this.categorias.push({Id_Categoria: response[key] ['Id_Categoria'], Nombre: response[key]['Nombre']});
     });
     console.log(this.categorias)
   }
@@ -126,9 +129,11 @@ export class AddProductsPage implements OnInit {
     this.newProduct.forma = 0;
     //console.log(this.newProduct);
     let response;
-    if(this.user.Tipo_Usuario === 1){//PROVEEDOR
+    console.log(this.user)
+    if(this.esProveedor){//PROVEEDOR
       
       console.log("proveedor");
+
       this.newProdProvider.id_proveedor = this.newProduct.user;
       this.newProdProvider.nombre = this.newProduct.nombre;
       this.newProdProvider.descripcion = this.newProduct.descripcion;
@@ -157,7 +162,7 @@ export class AddProductsPage implements OnInit {
         descripcion: '',
         imagen: '',
         precio: 0,
-        user: this.user.Id_Usuario,
+        user: this.user.id,
         categoria: 0,
         cantidad: 0,
         forma:-1

@@ -36,7 +36,7 @@
   <ion-item>
     <ion-label position="floating">Categoría:</ion-label>
     <ion-select [compareWith]="compareWith" [(ngModel)]="newProduct.categoria" clearInput required>
-      <ion-select-option *ngFor="let cate of categorias" [value]="cate.categoria">{{cate.nombre}}</ion-select-option>
+      <ion-select-option *ngFor="let cate of categorias" [value]="cate.Id_Categoria">{{cate.Nombre}}</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -55,6 +55,8 @@
     ></ion-input>
   </ion-item>
   <br>
+  <ion-label position="floating">LLENE UNICAMENTE PARA ARTICULOS A SUBASTAR</ion-label>
+    
   <ion-item>
     <ion-label position="floating">Fecha de inicio de la subasta:</ion-label>
     <ion-datetime [(ngModel)]="fecha1" display-timezone="utc"></ion-datetime>
@@ -63,6 +65,12 @@
   <ion-item>
     <ion-label position="floating">Fecha de fin de la subasta:</ion-label>
     <ion-datetime [(ngModel)]="fecha2" display-timezone="utc"></ion-datetime>
+  </ion-item>
+  <br>
+  <ion-label position="floating">UNICAMENTA PARA REGISTRAR PRODUCTOS EN TIENDAS EXTERNAS</ion-label>
+  <ion-item>
+    <ion-label>Es proveedor</ion-label>
+    <ion-toggle [(ngModel)]="show" (ionChange)="esProveedor = !esProveedor"></ion-toggle>
   </ion-item>
 
 
