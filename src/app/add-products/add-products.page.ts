@@ -118,11 +118,11 @@ export class AddProductsPage implements OnInit {
 
   async getCategorias(){
     const response = await this.connection.getCategorias();
-    console.log(response)
+    //console.log(response)
     Object.keys(response).forEach (key =>{
       this.categorias.push({Id_Categoria: response[key] ['Id_Categoria'], Nombre: response[key]['Nombre']});
     });
-    console.log(this.categorias)
+    //console.log(this.categorias)
   }
   
   async addProducto() {
@@ -134,7 +134,7 @@ export class AddProductsPage implements OnInit {
       
       console.log("proveedor");
 
-      this.newProdProvider.id_proveedor = this.newProduct.user;
+      this.newProdProvider.id_proveedor = this.user.id;
       this.newProdProvider.nombre = this.newProduct.nombre;
       this.newProdProvider.descripcion = this.newProduct.descripcion;
       this.newProdProvider.stock = this.newProduct.cantidad;
@@ -145,13 +145,14 @@ export class AddProductsPage implements OnInit {
     
     }else{// this.user.Tipo_Usuario === 0   // CLIENTE
       console.log("cliente");
-      this.newProdClient.id_cliente = this.newProduct.user;
+      console.log(this.user.id)
+      this.newProdClient.id_cliente = this.user.id;
       this.newProdClient.nombre = this.newProduct.nombre;
       this.newProdClient.descripcion = this.newProduct.descripcion;
       this.newProdClient.stock = this.newProduct.cantidad;
       this.newProdClient.precio_venta = this.newProduct.precio;
       this.newProdClient.foto = this.newProduct.imagen;
-
+      console.log(this.newProdClient)
       response = await this.connection.addProductClient(this.newProdClient);
     }
     
