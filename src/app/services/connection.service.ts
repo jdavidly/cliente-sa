@@ -22,7 +22,10 @@ export class ConnectionService {
 
   urlBus: string = 'http://49f171fd49c1.ngrok.io/';
   url: string = 'http://49f171fd49c1.ngrok.io/';
+<<<<<<< HEAD
   //url: string = 'http://localhost:3000/';
+=======
+>>>>>>> 6db3b94f9d8d9f9b113f32fac717bac907e9c6bc
   //url: string = 'https://sa-proyecto.herokuapp.com/';
 
   constructor(private http: HttpClient) {  }
