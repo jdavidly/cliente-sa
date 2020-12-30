@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CompraLocalPageRoutingModule } from './compra-local-routing.module';
 
 import { CompraLocalPage } from './compra-local.page';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CompraLocalPageRoutingModule
+    CompraLocalPageRoutingModule,
+    NgxDatatableModule
   ],
   declarations: [CompraLocalPage]
 })

@@ -37,7 +37,7 @@ export class CompraExternaPage implements OnInit {
   constructor(private connection: ConnectionService,
     private router: Router) {
     this.idUser = {
-      user: this.user.Id_Usuario
+      user: this.user.id
     }
     this.getProductos();
   }

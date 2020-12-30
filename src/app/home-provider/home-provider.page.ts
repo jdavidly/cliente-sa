@@ -10,7 +10,9 @@ import { User } from '../home-client/home-client.page';
 })
 export class HomeProviderPage implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+    console.log(this.user)
+  }
 
   ngOnInit() {
   }

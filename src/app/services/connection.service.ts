@@ -24,42 +24,55 @@ export class ConnectionService {
   url: string = 'http://localhost:3000/';
   //url: string = 'https://sa-proyecto.herokuapp.com/';
 
-  constructor(private http: HttpClient) { this.establecerConexion(); }
+  constructor(private http: HttpClient) {  }
 
   async establecerConexion(){
     this.ConexionGrupo = JSON.parse(localStorage.getItem('ConexionGrupo'));
-    switch(this.ConexionGrupo){
-      case 1:{  this.urlBus = "http://busg1.us-e2.cloudhub.io/";   break; }
-      case 3:{  this.urlBus = "http://35.206.98.190/";   break; }
-      case 4:{  this.urlBus = "http://esb4.djgg.ml:3030/";   break; }
-      case 5:{  this.urlBus = "http://34.123.238.63:8280/services/integrador/";   break; }
-      case 7:{  this.urlBus = "http://68.183.102.104:3000/";   break; }
-      case 9:{  this.urlBus = "http://sa-g9.us-e2.cloudhub.io/";   break; }
-
-      default:{ this.urlBus = "http://localhost:3000/";   break; }
-    }
+    console.log(this.ConexionGrupo);
+      if(this.ConexionGrupo == 1){  console.log("aqui en 1"); this.urlBus = "http://busg1.us-e2.cloudhub.io/"; }
+      else if(this.ConexionGrupo == 3){  this.urlBus = "http://35.206.98.190/"; }
+      else if(this.ConexionGrupo == 4){  this.urlBus = "http://esb4.djgg.ml:3030/"; }
+      else if(this.ConexionGrupo == 5){  this.urlBus = "http://34.123.238.63:8280/services/integrador/"; }
+      else if(this.ConexionGrupo == 6){  this.urlBus = "http://35.184.63.236:3004/"; }
+      else if(this.ConexionGrupo == 7){  this.urlBus = "http://68.183.102.104:3000/"; }
+      else if(this.ConexionGrupo == 8){  this.urlBus = "http://35.232.242.252:9999/"; }
+      else if(this.ConexionGrupo == 9){  this.urlBus = "http://sa-g9.us-e2.cloudhub.io/"; }
+      else if(this.ConexionGrupo == 10){  this.urlBus = "http://34.73.157.172:5005/"; }
+      else if(this.ConexionGrupo == 11){  this.urlBus = "http://soagrupo11.us-e2.cloudhub.io/"; }
+      else if(this.ConexionGrupo == 13){  this.urlBus = "http://www.sa-proyecto.tk/"; }
+      else if(this.ConexionGrupo == 15){  this.urlBus = "http://34.73.17.174:4000/"; }
+      else{ this.urlBus = "http://localhost:3000/"; }
+    
+    console.log("la conexion fue definida: ",this.urlBus)
   }
 
   // -------------------- BUS DE INTEGRACION --------------------
   async login(l: Login) {
-    return this.http.post(`${this.url}login-cliente`, l).toPromise();
+    this.establecerConexion();
+    return this.http.post(`${this.urlBus}login-cliente`, l).toPromise();
   }
   async signinClient(s: SigninClient) {
-    return this.http.post(`${this.url}registrar-cliente`, s).toPromise();
+    this.establecerConexion();
+    return this.http.post(`${this.urlBus}registrar-cliente`, s).toPromise();
   }
   async signinProvider(s: SigninProvider) {
-    return this.http.post(`${this.url}registrar-proveedor`, s).toPromise();
+    this.establecerConexion();
+    return this.http.post(`${this.urlBus}registrar-proveedor`, s).toPromise();
   }
   async addProductProvider(s: ProductProvider) {
+    this.establecerConexion();
     return this.http.post(`${this.urlBus}crear-producto-proveedor`, s).toPromise();
   }
   async addProductClient(s: ProductClient) {
+    this.establecerConexion();
     return this.http.post(`${this.urlBus}crear-producto-cliente`, s).toPromise();
   }
   async getProductsExtern() {
+    this.establecerConexion();
     return this.http.get(`${this.urlBus}ver-productos`).toPromise();
   }
   async comprar(s: Compra) {
+    this.establecerConexion();
     return this.http.post(`${this.urlBus}realizar-compra`, s).toPromise();
   }
   // ------------------------------------------------------------
