@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>compra-local</ion-title>
+
+  <ion-toolbar >
+    <ion-title>
+      Comprar Productos Local
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="bloque">
+  <br>
+  <ion-button color="warning" size="small" fill="outline" (click)="back()">Back</ion-button>
+  <br>
+  
+  <br>
+  <ngx-datatable 
+    [rows]="productos2"
+    [ngClass]="tableStyle"
+    [rowHeight]="'auto'"
+    [headerHeight]="50"
+    [columnMode]="'force'"
+  >
+    <ngx-datatable-column name="nombre"> </ngx-datatable-column>
+    <ngx-datatable-column name="stock"></ngx-datatable-column>
+    <ngx-datatable-column name="Actions" sortable="false">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <ion-button size="small" fill="outline" (click)="viewDetails(row)">Details</ion-button>
+        <ion-button color="success" size="small" fill="outline" (click)="addCar(row)">Add Car</ion-button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+  <br>
+  <ion-button color="success" size="small" fill="outline" (click)="buyNow()">Buy Now :)</ion-button>
+  <br>
 </ion-content>

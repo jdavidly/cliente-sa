@@ -38,6 +38,7 @@ export class ConnectionService {
 
       default:{ this.urlBus = "http://localhost:3000/";   break; }
     }
+    console.log("la conexion fue definida: ",this.urlBus)
   }
 
   // -------------------- BUS DE INTEGRACION --------------------
