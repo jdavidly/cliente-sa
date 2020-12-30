@@ -30,7 +30,7 @@ export class HomeClientPage implements OnInit {
       this.categorias = categorias;
     });
     this.prodService.get(1);
-    this.connection.getCart(this.user.Id_Usuario).subscribe((carritos: ProductoCarrito[]) => {
+    this.connection.getCart(this.user.id).subscribe((carritos: ProductoCarrito[]) => {
       this.carrito = carritos;
       this.contador = carritos.length;
     });
@@ -47,7 +47,7 @@ export class HomeClientPage implements OnInit {
   deleteOnCart(event: CustomEvent) {
     const value = event.detail['value'];
     this.connection.removeCart(value);
-    this.connection.getCart(this.user.Id_Usuario).subscribe((carritos: ProductoCarrito[]) => {
+    this.connection.getCart(this.user.id).subscribe((carritos: ProductoCarrito[]) => {
       this.carrito = carritos;
       this.contador = carritos.length;
     });
@@ -80,15 +80,12 @@ export class HomeClientPage implements OnInit {
 }
 
 export interface User {
-  Id_Usuario: number;
-  Nombres: string;
-  NIT: string;
-  Edad: number;
-  correo: string;
-  Telefono: string;
-  Tipo_Usuario: number;
-  Direccion: string;
-  Pass: string;
+  id: number;
+  nombre: string;
+  apellido: string;
+  celular: number;
+  email: string;
+  contrasena: string;
 }
 
 export interface Producto {
