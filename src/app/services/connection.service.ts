@@ -20,8 +20,8 @@ export class ConnectionService {
 
   ConexionGrupo:number = JSON.parse(localStorage.getItem('ConexionGrupo'));
 
-  urlBus: string = 'http://localhost:3000/';
-  url: string = 'http://localhost:3000/';
+  urlBus: string = 'http://35.226.247.82:8080/';
+  url: string = 'http://35.226.247.82:8080/';
   //url: string = 'https://sa-proyecto.herokuapp.com/';
 
   constructor(private http: HttpClient) {  }
@@ -41,7 +41,7 @@ export class ConnectionService {
       else if(this.ConexionGrupo == 11){  this.urlBus = "http://soagrupo11.us-e2.cloudhub.io/"; }
       else if(this.ConexionGrupo == 13){  this.urlBus = "http://www.sa-proyecto.tk/"; }
       else if(this.ConexionGrupo == 15){  this.urlBus = "http://34.73.17.174:4000/"; }
-      else{ this.urlBus = "http://localhost:3000/"; }
+      else{ this.urlBus = "http://35.226.247.82:8080/"; }
     
     console.log("la conexion fue definida: ",this.urlBus)
   }
